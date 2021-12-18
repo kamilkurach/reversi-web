@@ -6,8 +6,8 @@ Reversi game in JavaScript with multiple AI players.
 # Technologies
 
 * JavaScript
-* html
-* css
+* HTML
+* CSS
 * MVC pattern
 * live-server
 * eslint
