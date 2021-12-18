@@ -1,18 +1,18 @@
 class Controller {
-    board;
-    view;
+  board;
 
-    constructor(board, view) {
-        this.board = board;
-        this.view = view;
-    }
+  view;
 
-    initController() {
-        console.log('init Controller class');
-        this.board.initBaord();
-        this.view.initView();
-    }
+  constructor(board, view) {
+    this.board = board;
+    this.view = view;
+  }
 
+  initController() {
+    console.log('init Controller class');
+    this.board.initBaord();
+    this.view.initView();
+  }
 }
 
 export { Controller };

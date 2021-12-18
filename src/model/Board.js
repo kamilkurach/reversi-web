@@ -1,11 +1,10 @@
 class Board {
-    constructor() {
-    }
+  constructor() {
+  }
 
-    initBaord() {
-        console.log('init Board class');
-    }
-
+  initBaord() {
+    console.log('init Board class');
+  }
 }
 
 export { Board };
