@@ -1,9 +1,20 @@
-## reversi-web
 
-* [TODO] AI Player (+real time visualizations):
-  1. [] Monte Carlo tree search (v1.1)
-  2. [] Alpha–beta pruning (v1.2)
-  3. [] Reinforcement Learning (v1.3)
-  4. [] NN based (v1.4)
+# General info
 
-[TODO] mini tutorials for AI modules
+Reversi game in JavaScript with multiple AI players.
+
+# Technologies
+
+* JavaScript
+* html
+* css
+* MVC pattern
+* live-server
+* eslint
+
+# AI player modules
+
+* [] Monte Carlo tree search (v1.1)
+* [] Alpha–beta pruning (v1.2)
+* [] Reinforcement Learning (v1.3)
+* [] NN based (v1.4)
