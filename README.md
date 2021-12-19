@@ -1,4 +1,7 @@
 
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/yacotaco/reversi-web.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/yacotaco/reversi-web/context:javascript)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/yacotaco/reversi-web.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/yacotaco/reversi-web/alerts/)
+
 # General info
 
 Reversi game in JavaScript with multiple AI players.
