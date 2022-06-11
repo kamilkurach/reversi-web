@@ -1,3 +1,5 @@
+import * as THREE from '../node_modules/three/build/three.module.js';
+
 class View {
   constructor() {
     // from developer.mozilla.org
@@ -10,18 +12,19 @@ class View {
 
   // from developer.mozilla.org
   addElement() {
-    // create a new div element
-    const newDiv = document.createElement('div');
+      const scene = new THREE.Scene();
+			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
-    // and give it some content
-    const newContent = document.createTextNode('Hi there and greetings!');
+			const renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
 
-    // add the text node to the newly created div
-    newDiv.appendChild(newContent);
+			const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+			const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+			const cube = new THREE.Mesh( geometry, material );
+			scene.add( cube );
 
-    // add the newly created element and its content into the DOM
-    const currentDiv = document.getElementById('div1');
-    document.body.insertBefore(newDiv, currentDiv);
+			camera.position.z = 5;
   }
 }
 
