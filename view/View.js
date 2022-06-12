@@ -39,16 +39,39 @@ class View {
 
       const cube = new THREE.Mesh(
         new THREE.BoxGeometry( 1, 1, 1 ),
-        new THREE.MeshBasicMaterial( { color: 0xFFD700 } ) 
+        new THREE.MeshBasicMaterial( { color: 0x8cd6ff } ) 
       );
       cube.rotation.x = - Math.PI / 3;
       cube.position.y = 0.5;
+      cube.position.z = 2;
       scene.add( cube );
+
+      const cube2 = new THREE.Mesh(
+        new THREE.BoxGeometry( 1, 1, 1 ),
+        new THREE.MeshBasicMaterial( { color: 0xFFD700 } ) 
+      );
+      cube2.rotation.x = - Math.PI / 3;
+      cube2.position.y = 1;
+      cube2.position.x = 4;
+    
+
+      scene.add( cube2 );
+
+      const cube3 = new THREE.Mesh(
+        new THREE.BoxGeometry( 1, 1, 1 ),
+        new THREE.MeshBasicMaterial( { color: 0xFFD600 } ) 
+      );
+      cube3.rotation.x = - Math.PI / 3;
+      cube3.position.y = 1;
+      cube3.position.x = -3;
+      cube3.position.z = 3;
+
+      scene.add( cube3 );
 		
       camera.position.z = 5;
       camera.position.x = 150;
       camera.position.z = 150;
-
+      
       
 
       function animate() {
@@ -56,7 +79,15 @@ class View {
 
 				cube.rotation.x += 0.05;
 				cube.rotation.y += 0.02;
-        cube.rotation.z += 0.1
+        cube.rotation.z += 0.001
+
+        cube2.rotation.x += 0.05;
+				cube2.rotation.y += 0.02;
+        cube2.rotation.z += 0.1
+
+        cube3.rotation.x += 0.05;
+				cube3.rotation.y += 0.02;
+        cube3.rotation.z += 0.1
 
         if(camera.position.x != 5) {
           animateCamera();
