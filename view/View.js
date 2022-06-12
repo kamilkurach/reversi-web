@@ -45,21 +45,32 @@ class View {
       cube.position.y = 0.5;
       scene.add( cube );
 		
-      camera.position.z = 7;
+      camera.position.z = 5;
+      camera.position.x = 150;
+      camera.position.z = 150;
+
+      
 
       function animate() {
 				requestAnimationFrame( animate );
 
 				cube.rotation.x += 0.05;
 				cube.rotation.y += 0.02;
-        cube.rotation.z += 0.1;
+        cube.rotation.z += 0.1
+
+        if(camera.position.x != 5) {
+          animateCamera();
+        }
 
 				renderer.render( scene, camera );
 			};
 
-			animate();
+      function animateCamera() {
+        camera.position.x -= 5;
+        camera.position.z -= 5;
+      }
 
-      renderer.render(scene, camera)
+			animate();
   }
 }
 
