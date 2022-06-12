@@ -15,16 +15,20 @@ class View {
   addElement() {
 
       const scene = new THREE.Scene();
-      scene.background = new THREE.Color( 0x72645b );
+      scene.background = new THREE.Color( 0xc6e4ee );
       scene.fog = new THREE.Fog( 0x72645b, 2, 15 );
-			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.2, 1000 );
+			const camera = new THREE.PerspectiveCamera( 85, window.innerWidth / window.innerHeight, 0.2, 1000 );
+      
+      camera.lookAt( -1, 0, -1 );
+      // camera.up.set( 0, 0, 1 );
+      camera.updateProjectionMatrix();
 
       const plane = new THREE.Mesh(
         new THREE.PlaneGeometry( 40, 40 ),
         new THREE.MeshPhongMaterial( { color: 0xFFC, specular: 0x101010 } )
       );
-      plane.rotation.x = - Math.PI /2.5;
-      plane.position.y = - 0.9;
+      plane.rotation.x = - Math.PI / 2.5;
+      plane.position.y = - 0.2;
       scene.add( plane );
 
       plane.receiveShadow = true;
@@ -38,7 +42,7 @@ class View {
         new THREE.MeshBasicMaterial( { color: 0xFFD700 } ) 
       );
       cube.rotation.x = - Math.PI / 3;
-      cube.position.y = - 0.2;
+      cube.position.y = 0.5;
       scene.add( cube );
 		
       camera.position.z = 7;
