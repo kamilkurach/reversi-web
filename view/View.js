@@ -1,6 +1,7 @@
-import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.module.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.122.0/build/three.module.js';
 
 class View {
+
   constructor() {
     // from developer.mozilla.org
     document.body.onload = this.addElement;
@@ -12,30 +13,51 @@ class View {
 
   // from developer.mozilla.org
   addElement() {
+
       const scene = new THREE.Scene();
-			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+      scene.background = new THREE.Color( 0x72645b );
+      scene.fog = new THREE.Fog( 0x72645b, 2, 15 );
+			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.2, 1000 );
+
+      const plane = new THREE.Mesh(
+        new THREE.PlaneGeometry( 40, 40 ),
+        new THREE.MeshPhongMaterial( { color: 0xFFC, specular: 0x101010 } )
+      );
+      plane.rotation.x = - Math.PI /2.5;
+      plane.position.y = - 0.9;
+      scene.add( plane );
+
+      plane.receiveShadow = true;
 
 			const renderer = new THREE.WebGLRenderer();
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			document.body.appendChild( renderer.domElement );
 
-			const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-			const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-			const cube = new THREE.Mesh( geometry, material );
-			scene.add( cube );
-      camera.position.z = 5;
+      const cube = new THREE.Mesh(
+        new THREE.BoxGeometry( 1, 1, 1 ),
+        new THREE.MeshBasicMaterial( { color: 0xFFD700 } ) 
+      );
+      cube.rotation.x = - Math.PI / 3;
+      cube.position.y = - 0.2;
+      scene.add( cube );
+		
+      camera.position.z = 7;
 
       function animate() {
 				requestAnimationFrame( animate );
 
-				cube.rotation.x += 0.01;
-				cube.rotation.y += 0.01;
+				cube.rotation.x += 0.05;
+				cube.rotation.y += 0.02;
+        cube.rotation.z += 0.1;
 
 				renderer.render( scene, camera );
 			};
 
 			animate();
+
+      renderer.render(scene, camera)
   }
 }
+
 
 export { View };
