@@ -1,4 +1,5 @@
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.122.0/build/three.module.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.141.0/build/three.module.js';
+// import * as THREE from '../node_modules/three/build/three.module.js'
 
 class View {
 
@@ -15,19 +16,17 @@ class View {
   addElement() {
 
       const scene = new THREE.Scene();
+      const axesHelper = new THREE.AxesHelper( 10 );
+      // scene.add( axesHelper );
       scene.background = new THREE.Color( 0xc6e4ee );
       scene.fog = new THREE.Fog( 0x72645b, 2, 15 );
 			const camera = new THREE.PerspectiveCamera( 85, window.innerWidth / window.innerHeight, 0.2, 1000 );
       
-      camera.lookAt( -1, 0, -1 );
-      // camera.up.set( 0, 0, 1 );
-      camera.updateProjectionMatrix();
-
       const plane = new THREE.Mesh(
         new THREE.PlaneGeometry( 40, 40 ),
         new THREE.MeshPhongMaterial( { color: 0xFFC, specular: 0x101010 } )
       );
-      plane.rotation.x = - Math.PI / 2.5;
+      plane.rotation.x = - Math.PI / 3;
       plane.position.y = - 0.2;
       scene.add( plane );
 
@@ -43,7 +42,7 @@ class View {
       );
       cube.rotation.x = - Math.PI / 3;
       cube.position.y = 0.5;
-      cube.position.z = 2;
+      cube.position.z = 1;
       scene.add( cube );
 
       const cube2 = new THREE.Mesh(
@@ -62,17 +61,16 @@ class View {
         new THREE.MeshBasicMaterial( { color: 0xFFD600 } ) 
       );
       cube3.rotation.x = - Math.PI / 3;
-      cube3.position.y = 1;
-      cube3.position.x = -3;
-      cube3.position.z = 3;
+      cube3.position.y = 2;
+      cube3.position.x = 8;
+      cube3.position.z = 1;
 
       scene.add( cube3 );
 		
-      camera.position.z = 5;
-      camera.position.x = 150;
-      camera.position.z = 150;
-      
-      
+      camera.position.z = 0;
+      camera.position.x = 2;
+      camera.position.z = 10;
+           
 
       function animate() {
 				requestAnimationFrame( animate );
@@ -89,9 +87,11 @@ class View {
 				cube3.rotation.y += 0.02;
         cube3.rotation.z += 0.1
 
-        if(camera.position.x != 5) {
-          animateCamera();
-        }
+        camera.rotation.z += - 0.005; 
+
+        // if(camera.position.x != 10 && camera.position.z != 10) {
+        //   animateCamera();
+        // } 
 
 				renderer.render( scene, camera );
 			};
