@@ -87,11 +87,11 @@ class View {
     scene.add(frame_cube);
 
     // LINES
-    const board_geometry = new THREE.BoxGeometry(8.25, 8.25, 0.0001);
+    const board_geometry = new THREE.BoxGeometry(8.20, 8.20, 0.0001);
     const board_material = new THREE.MeshBasicMaterial({ color: 0x00000000 });
     const board_cube = new THREE.Mesh(board_geometry, board_material);
-    board_cube.position.x = 3.58;
-    board_cube.position.y = 3.58;
+    board_cube.position.x = 3.55;
+    board_cube.position.y = 3.59;
     board_cube.position.z = - 0.1;
     scene.add(board_cube);
 
