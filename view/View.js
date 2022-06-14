@@ -75,6 +75,12 @@ class View {
     const frame_geometry = new THREE.BoxGeometry(8.6, 8.6, 1);
     const frame_material = new THREE.MeshBasicMaterial({ color: 0x805322 });
     const frame_cube = new THREE.Mesh(frame_geometry, frame_material);
+    const edges = new THREE.EdgesGeometry( frame_geometry );
+    const line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x000000 } ) );
+    scene.add( line );
+    line.position.x = 3.58;
+    line.position.y = 3.58;
+    line.position.z = - 0.7;
     frame_cube.position.x = 3.58;
     frame_cube.position.y = 3.58;
     frame_cube.position.z = - 0.7;
