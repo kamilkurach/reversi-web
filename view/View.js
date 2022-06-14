@@ -16,10 +16,10 @@ class View {
     const scene = new THREE.Scene();
 
     scene.background = new THREE.Color(0xc6e4ee);
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.2, 1000);
-    // const camera = new THREE.OrthographicCamera(1, window.innerWidth / window.innerHeight, 0.2, 1);
+    // const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.2, 1000);
+    const camera = new THREE.OrthographicCamera( 21 / - 2, 21 / 2, 15 / 2, 15 / - 2, 1, 1000 );
 
-    const renderer = new THREE.WebGLRenderer();
+    const renderer = new THREE.WebGLRenderer( { alpha: true, antialias: true } );
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
@@ -34,6 +34,7 @@ class View {
             scene.add(cube);
             cube.position.x = i;
             cube.position.y = j;
+            cube.position.z = - 0.1;
           } else {
             const geometry = new THREE.BoxGeometry(1, 1, 0.01);
             const material = new THREE.MeshBasicMaterial({ color: 0x405336 });
@@ -41,25 +42,28 @@ class View {
             scene.add(cube);
             cube.position.x = i;
             cube.position.y = j;
+            cube.position.z = - 0.1;
           }
           i = i + 0.02;
         }
       } else {
         for (let i = 0; i < 8; i++) {
           if (i % 2 != 0) {
-            const geometry = new THREE.BoxGeometry(1, 1, 0.001);
+            const geometry = new THREE.BoxGeometry(1, 1, 0.01);
             const material = new THREE.MeshBasicMaterial({ color: 0x405336 });
             const cube = new THREE.Mesh(geometry, material);
             scene.add(cube);
             cube.position.x = i;
             cube.position.y = j;
+            cube.position.z = - 0.1;
           } else {
-            const geometry = new THREE.BoxGeometry(1, 1, 0.001);
+            const geometry = new THREE.BoxGeometry(1, 1, 0.01);
             const material = new THREE.MeshBasicMaterial({ color: 0x405336 });
             const cube = new THREE.Mesh(geometry, material);
             scene.add(cube);
             cube.position.x = i;
             cube.position.y = j;
+            cube.position.z = - 0.1;
           }
           i = i + 0.02;
         }
@@ -68,31 +72,31 @@ class View {
     }
 
     // FRAME
-    const frame_geometry = new THREE.BoxGeometry(8.6, 8.6, 0.001);
+    const frame_geometry = new THREE.BoxGeometry(8.6, 8.6, 1);
     const frame_material = new THREE.MeshBasicMaterial({ color: 0x805322 });
     const frame_cube = new THREE.Mesh(frame_geometry, frame_material);
     frame_cube.position.x = 3.58;
     frame_cube.position.y = 3.58;
-    frame_cube.position.z = - 0.03;
+    frame_cube.position.z = - 0.7;
     scene.add(frame_cube);
 
     // LINES
-    const board_geometry = new THREE.BoxGeometry(8.35, 8.35, 0.001);
+    const board_geometry = new THREE.BoxGeometry(8.25, 8.25, 0.0001);
     const board_material = new THREE.MeshBasicMaterial({ color: 0x00000000 });
     const board_cube = new THREE.Mesh(board_geometry, board_material);
     board_cube.position.x = 3.58;
     board_cube.position.y = 3.58;
-    board_cube.position.z = - 0.01;
+    board_cube.position.z = - 0.1;
     scene.add(board_cube);
 
     // CAMERA 
-    camera.position.x = 6.5;
-    camera.position.y = - 0.2;
-    camera.position.z = 6.0;
+    camera.position.x = 5.5;
+    camera.position.y = 2;
+    camera.position.z = 5.0;
 
-    camera.rotation.x = 0.37;
+    camera.rotation.x = 0.27;
     camera.rotation.y = 0.27;
-    camera.rotation.z = 0.47;
+    camera.rotation.z = 0.65;
 
     function initDiscs() {
       const geometry1 = new THREE.CylinderGeometry(0.3, 0.3, 0.5, 32);
