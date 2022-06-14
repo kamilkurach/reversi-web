@@ -17,9 +17,9 @@ class View {
 
     scene.background = new THREE.Color(0xc6e4ee);
     // const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.2, 1000);
-    const camera = new THREE.OrthographicCamera( 21 / - 2, 21 / 2, 15 / 2, 15 / - 2, 1, 1000 );
+    const camera = new THREE.OrthographicCamera(21 / - 2, 21 / 2, 15 / 2, 15 / - 2, 1, 1000);
 
-    const renderer = new THREE.WebGLRenderer( { alpha: true, antialias: true } );
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
@@ -75,9 +75,9 @@ class View {
     const frame_geometry = new THREE.BoxGeometry(8.6, 8.6, 1);
     const frame_material = new THREE.MeshBasicMaterial({ color: 0x805322 });
     const frame_cube = new THREE.Mesh(frame_geometry, frame_material);
-    const edges = new THREE.EdgesGeometry( frame_geometry );
-    const line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x000000 } ) );
-    scene.add( line );
+    const edges = new THREE.EdgesGeometry(frame_geometry);
+    const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000000 }));
+    scene.add(line);
     line.position.x = 3.58;
     line.position.y = 3.58;
     line.position.z = - 0.7;
@@ -113,7 +113,7 @@ class View {
       cube1.position.y = 4.1;
       cube1.position.z = 0;
       cube1.rotation.x = -1.5;
-  
+
       const geometry2 = new THREE.CylinderGeometry(0.3, 0.3, 0.5, 32);
       const material2 = new THREE.MeshBasicMaterial({ color: 0x00000000 });
       const cube2 = new THREE.Mesh(geometry2, material2);
@@ -122,7 +122,7 @@ class View {
       cube2.position.y = 4.1;
       cube2.position.z = 0;
       cube2.rotation.x = -1.5;
-      
+
       const geometry3 = new THREE.CylinderGeometry(0.3, 0.3, 0.5, 32);
       const material3 = new THREE.MeshBasicMaterial({ color: 0xFFFFFF });
       const cube3 = new THREE.Mesh(geometry3, material3);
@@ -144,8 +144,6 @@ class View {
 
     initDiscs();
 
-  
-    
     // RENDER
     renderer.render(scene, camera);
   }
