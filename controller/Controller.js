@@ -11,7 +11,8 @@ class Controller {
   initController() {
     console.log('init Controller class');
     this.board.initBaord();
-    this.view.initView();
+    // this.view.initView();
+    document.body.onload = this.view.constructBasicScene();
   }
 }
 
