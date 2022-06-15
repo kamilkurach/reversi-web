@@ -78,51 +78,18 @@ class View {
 
   constructBasicScene() {
 
-    for (let j = 0; j < 8; j++) {
-      if (j % 2 != 0) {
-        for (let i = 0; i < 8; i++) {
-          if (i % 2 != 0) {
-            const geometry = new THREE.BoxGeometry(1, 1, 0.01);
-            const material = new THREE.MeshBasicMaterial({ color: 0x405336 });
-            const cube = new THREE.Mesh(geometry, material);
-            this.scene.add(cube);
-            cube.position.x = i;
-            cube.position.y = j;
-            cube.position.z = - 0.1;
-          } else {
-            const geometry = new THREE.BoxGeometry(1, 1, 0.01);
-            const material = new THREE.MeshBasicMaterial({ color: 0x405336 });
-            const cube = new THREE.Mesh(geometry, material);
-            this.scene.add(cube);
-            cube.position.x = i;
-            cube.position.y = j;
-            cube.position.z = - 0.1;
-          }
-          i = i + 0.02;
-        }
-      } else {
-        for (let i = 0; i < 8; i++) {
-          if (i % 2 != 0) {
-            const geometry = new THREE.BoxGeometry(1, 1, 0.01);
-            const material = new THREE.MeshBasicMaterial({ color: 0x405336 });
-            const cube = new THREE.Mesh(geometry, material);
-            this.scene.add(cube);
-            cube.position.x = i;
-            cube.position.y = j;
-            cube.position.z = - 0.1;
-          } else {
-            const geometry = new THREE.BoxGeometry(1, 1, 0.01);
-            const material = new THREE.MeshBasicMaterial({ color: 0x405336 });
-            const cube = new THREE.Mesh(geometry, material);
-            this.scene.add(cube);
-            cube.position.x = i;
-            cube.position.y = j;
-            cube.position.z = - 0.1;
-          }
-          i = i + 0.02;
-        }
+    for (let i = 0; i < 8; i++) {
+      for (let j = 0; j < 8; j++) {
+        const geometry = new THREE.BoxGeometry(1, 1, 0.01);
+        const material = new THREE.MeshBasicMaterial({ color: 0x405336 });
+        const cube = new THREE.Mesh(geometry, material);
+        this.scene.add(cube);
+        cube.position.x = j;
+        cube.position.y = i;
+        cube.position.z = - 0.1;
+        j += 0.02;
       }
-      j = j + 0.02;
+      i += 0.02;
     }
 
     // FRAME
