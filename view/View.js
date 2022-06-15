@@ -13,6 +13,10 @@ class View {
     this.initView();
   }
 
+  getScene() {
+    return this.scene;
+  }
+
   initView() {
     console.log('init View class');
     this.sceneSetup();
@@ -31,23 +35,25 @@ class View {
 
   makeDisc(x, y, option) {
     if (option == 0) {
-      const geometry1 = new THREE.CylinderGeometry(0.3, 0.3, 0.5, 32);
-      const material1 = new THREE.MeshBasicMaterial({ color: 0x000000 });
-      const cube1 = new THREE.Mesh(geometry1, material1);
-      this.scene.add(cube1);
-      cube1.position.x = x;
-      cube1.position.y = y;
-      cube1.position.z = 0;
-      cube1.rotation.x = -1.5;
+      const geometry = new THREE.CylinderGeometry(0.3, 0.3, 0.5, 32);
+      const material = new THREE.MeshBasicMaterial({ color: 0x000000 });
+      const disc = new THREE.Mesh(geometry, material);
+      disc.name = "black_disc" + " x: " + x + " y: " + y;
+      this.scene.add(disc);
+      disc.position.x = x;
+      disc.position.y = y;
+      disc.position.z = 0;
+      disc.rotation.x = -1.5;
     } else if (option == 1) {
-      const geometry1 = new THREE.CylinderGeometry(0.3, 0.3, 0.5, 32);
-      const material1 = new THREE.MeshBasicMaterial({ color: 0xFFFFFF });
-      const cube1 = new THREE.Mesh(geometry1, material1);
-      this.scene.add(cube1);
-      cube1.position.x = x;
-      cube1.position.y = y;
-      cube1.position.z = 0;
-      cube1.rotation.x = -1.5;
+      const geometry = new THREE.CylinderGeometry(0.3, 0.3, 0.5, 32);
+      const material = new THREE.MeshBasicMaterial({ color: 0xFFFFFF });
+      const disc = new THREE.Mesh(geometry, material);
+      disc.name = "white_disc" + " x: " + x + " y: " + y;
+      this.scene.add(disc);
+      disc.position.x = x;
+      disc.position.y = y;
+      disc.position.z = 0;
+      disc.rotation.x = -1.5;
     }
   }
 
@@ -83,6 +89,7 @@ class View {
         const geometry = new THREE.BoxGeometry(1, 1, 0.01);
         const material = new THREE.MeshBasicMaterial({ color: 0x405336 });
         const cube = new THREE.Mesh(geometry, material);
+        cube.name = "square" + " x: " + j.toFixed(2) + " y: " + i.toFixed(2);
         this.scene.add(cube);
         cube.position.x = j;
         cube.position.y = i;
@@ -96,8 +103,10 @@ class View {
     const frame_geometry = new THREE.BoxGeometry(8.6, 8.6, 1);
     const frame_material = new THREE.MeshBasicMaterial({ color: 0x805322 });
     const frame_cube = new THREE.Mesh(frame_geometry, frame_material);
+    frame_cube.name = "frame_cube";
     const edges = new THREE.EdgesGeometry(frame_geometry);
     const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000000 }));
+    line.name = "frame_edges";
     this.scene.add(line);
     line.position.x = 3.58;
     line.position.y = 3.58;
@@ -110,11 +119,12 @@ class View {
     // LINES
     const board_geometry = new THREE.BoxGeometry(8.20, 8.20, 0.0001);
     const board_material = new THREE.MeshBasicMaterial({ color: 0x00000000 });
-    const board_cube = new THREE.Mesh(board_geometry, board_material);
-    board_cube.position.x = 3.55;
-    board_cube.position.y = 3.59;
-    board_cube.position.z = - 0.1;
-    this.scene.add(board_cube);
+    const board_lines = new THREE.Mesh(board_geometry, board_material);
+    board_lines.name = "board_lines";
+    board_lines.position.x = 3.55;
+    board_lines.position.y = 3.59;
+    board_lines.position.z = - 0.1;
+    this.scene.add(board_lines);
 
     this.updateView();
   }
