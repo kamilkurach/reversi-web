@@ -22,7 +22,32 @@ class View {
     this.sceneSetup();
     this.rendererSetup();
     this.cameraSetup();
-    this.initDiscs();
+    // this.initDiscs();
+    this.sayHi();
+  }
+
+  sayHi() {
+    // H
+    this.makeDisc(1.1, 2, 1);
+    this.makeDisc(1.1, 3, 0);
+    this.makeDisc(1.1, 4, 1);
+    this.makeDisc(1.1, 5, 0);
+    this.makeDisc(1.1, 6, 1);
+    this.makeDisc(2.1, 4, 0);
+    this.makeDisc(3.1, 4, 0);
+    this.makeDisc(4.1, 2, 1);
+    this.makeDisc(4.1, 3, 0);
+    this.makeDisc(4.1, 4, 1);
+    this.makeDisc(4.1, 5, 0);
+    this.makeDisc(4.1, 6, 1);
+    // I
+    this.makeDisc(6.1, 2, 0);
+    this.makeDisc(6.1, 3, 1);
+    this.makeDisc(6.1, 4, 0);
+    this.makeDisc(6.1, 5, 1);
+    this.makeDisc(6.1, 6, 0);
+
+    this.updateView();
   }
 
   initDiscs() {
