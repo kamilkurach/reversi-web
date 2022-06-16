@@ -13,10 +13,6 @@ class View {
     this.initView();
   }
 
-  getScene() {
-    return this.scene;
-  }
-
   initView() {
     console.log('init View class');
     this.sceneSetup();
@@ -86,9 +82,17 @@ class View {
     this.scene.background = new THREE.Color(0xc6e4ee);
   }
 
+  getScene() {
+    return this.scene;
+  }
+
   rendererSetup() {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(this.renderer.domElement);
+  }
+
+  getRenderer() {
+    return this.renderer;
   }
 
   cameraSetup() {
@@ -100,6 +104,10 @@ class View {
     this.camera.rotation.x = 0.27;
     this.camera.rotation.y = 0.27;
     this.camera.rotation.z = 0.65;
+  }
+
+  getCamera() {
+    return this.camera;
   }
 
   updateView() {
