@@ -2,55 +2,45 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.141.0/build/three.m
 
 class Controller {
   board;
-  raycaster = new THREE.Raycaster();
-  pointer = { x : 0, y : 0 };
   view;
+  camera;
+  scene;
 
   constructor(board, view) {
     this.board = board;
     this.view = view;
+    this.camera = view.getCamera();
+    this.scene = view.getScene();
+    this.renderer = view.getRenderer();
   }
 
   initController() {
     console.log('init Controller class');
     this.board.initBaord();
     // this.view.initView();
+    // console.log("init scope " + this.camera);
     document.body.onload = this.view.constructBasicScene();
-    this.addRaycaster();
+    window.addEventListener( 'click', this.onPointerMove );
+    // this.addRaycaster();
   }
 
-  addRaycaster() {
-    var camera = this.view.camera;
-    var raycaster = this.raycaster;
-    var pointer = this.pointer;
-    var scene = this.view.scene;
-    var renderer = this.view.renderer;
+  onPointerMove = event => {
+    // console.log("method scope " + this.camera);
+    let raycaster = new THREE.Raycaster();
+    let pointer = { x : 0, y : 0 };
 
-    function onPointerMove( event ) {
-
-      // calculate pointer position in normalized device coordinates
-      // (-1 to +1) for both components
-
-      pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-      pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+    pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+    pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
     
+    raycaster.setFromCamera( pointer, this.camera );
 
-      // update the picking ray with the camera and pointer position
-      raycaster.setFromCamera( pointer, camera );
+    let intersects = raycaster.intersectObjects( this.scene.children );
+    let x = intersects[ 0 ].object.position.x
+    let y = intersects[ 0 ].object.position.y
 
-      // calculate objects intersecting the picking ray
-      var intersects = raycaster.intersectObjects( scene.children );
+    this.view.makeDisc(x, y, 0);
 
-      
-      intersects[ 0 ].object.material.color.set( 0x90EE90 );
-
-      renderer.render( scene, camera );
-
-    }
-
-    window.addEventListener( 'pointermove', onPointerMove );
-
-    // window.requestAnimationFrame(render);
+    this.renderer.render( this.scene, this.camera );
   }
 }
 
