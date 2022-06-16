@@ -20,27 +20,28 @@ class Controller {
     // this.view.initView();
     // console.log("init scope " + this.camera);
     document.body.onload = this.view.constructBasicScene();
-    window.addEventListener( 'click', this.onPointerMove );
+    this.onPointerMove = this.onPointerMove.bind(this);
+    window.addEventListener('click', this.onPointerMove);
     // this.addRaycaster();
   }
 
-  onPointerMove = event => {
+  onPointerMove(event) {
     // console.log("method scope " + this.camera);
     let raycaster = new THREE.Raycaster();
     let pointer = new THREE.Vector2();
 
-    pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-    pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-    
-    raycaster.setFromCamera( pointer, this.camera );
+    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+    pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
 
-    let intersects = raycaster.intersectObjects( this.scene.children );
-    let x = intersects[ 0 ].object.position.x
-    let y = intersects[ 0 ].object.position.y
+    raycaster.setFromCamera(pointer, this.camera);
+
+    let intersects = raycaster.intersectObjects(this.scene.children);
+    let x = intersects[0].object.position.x
+    let y = intersects[0].object.position.y
 
     this.view.makeDisc(x, y, 0);
 
-    this.renderer.render( this.scene, this.camera );
+    this.renderer.render(this.scene, this.camera);
   }
 }
 
