@@ -27,7 +27,7 @@ class Controller {
   onPointerMove = event => {
     // console.log("method scope " + this.camera);
     let raycaster = new THREE.Raycaster();
-    let pointer = { x : 0, y : 0 };
+    let pointer = new THREE.Vector2();
 
     pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
     pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
