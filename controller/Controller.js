@@ -23,17 +23,19 @@ class Controller {
   }
 
   initDiscs() {
-    this.view.makeDisc(4.1, 4.1, 2);
-    this.board.setBoardGrid(4, 4, 2);
+    this.view.makeDisc(4.1, 4.1, 1);
+    this.board.setBoardGrid(4, 4, 1);
 
-    this.view.makeDisc(3.1, 4.1, 1);
-    this.board.setBoardGrid(3, 4, 1);
+    this.view.makeDisc(3.1, 4.1, 2);
+    this.board.setBoardGrid(3, 4, 2);
 
-    this.view.makeDisc(3.1, 3.1, 2);
-    this.board.setBoardGrid(3, 3, 2);
+    this.view.makeDisc(3.1, 3.1, 1);
+    this.board.setBoardGrid(3, 3, 1);
 
-    this.view.makeDisc(4.1, 3.1, 1);
-    this.board.setBoardGrid(4, 3, 1);
+    this.view.makeDisc(4.1, 3.1, 2);
+    this.board.setBoardGrid(4, 3, 2);
+
+    this.board.printBoardGrid();
 
     this.view.updateView();
   };
