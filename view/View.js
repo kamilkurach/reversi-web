@@ -5,6 +5,7 @@ class View {
   scene;
   camera;
   renderer;
+  is3D = false;
 
   constructor() {
     this.scene = new THREE.Scene();
@@ -96,14 +97,25 @@ class View {
   }
 
   cameraSetup() {
-    // POSITION
-    this.camera.position.x = 5.5;
-    this.camera.position.y = 2;
-    this.camera.position.z = 5.0;
-    // ROTATION
-    this.camera.rotation.x = 0.27;
-    this.camera.rotation.y = 0.27;
-    this.camera.rotation.z = 0.65;
+    if (this.is3D == true) {
+      // POSITION
+      this.camera.position.x = 5.5;
+      this.camera.position.y = 2;
+      this.camera.position.z = 5.0;
+      // ROTATION
+      this.camera.rotation.x = 0.27;
+      this.camera.rotation.y = 0.27;
+      this.camera.rotation.z = 0.65;
+    } else if (this.is3D == false) {
+      // POSITION
+      this.camera.position.x = 3;
+      this.camera.position.y = 3;
+      this.camera.position.z = 5.0;
+      // ROTATION
+      this.camera.rotation.x = 0;
+      this.camera.rotation.y = 0
+      this.camera.rotation.z = 0;
+    }
   }
 
   getCamera() {
