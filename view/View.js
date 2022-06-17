@@ -145,7 +145,7 @@ class View {
     }
 
     // FRAME
-    const frame_geometry = new THREE.BoxGeometry(8.6, 8.6, 1);
+    const frame_geometry = new THREE.BoxGeometry(8.6, 8.6, 0.5);
     const frame_material = new THREE.MeshBasicMaterial({ color: 0x805322 });
     const frame_cube = new THREE.Mesh(frame_geometry, frame_material);
     frame_cube.name = "frame_cube";
