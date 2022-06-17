@@ -47,7 +47,7 @@ class View {
   }
 
   makeDisc(x, y, option) {
-    if (option == 0) {
+    if (option == 1) {
       const geometry = new THREE.CylinderGeometry(0.3, 0.3, 0.5, 32);
       const material = new THREE.MeshBasicMaterial({ color: 0x000000 });
       const disc = new THREE.Mesh(geometry, material);
@@ -57,7 +57,7 @@ class View {
       disc.position.y = y;
       disc.position.z = 0;
       disc.rotation.x = -1.5;
-    } else if (option == 1) {
+    } else if (option == 2) {
       const geometry = new THREE.CylinderGeometry(0.3, 0.3, 0.5, 32);
       const material = new THREE.MeshBasicMaterial({ color: 0xFFFFFF });
       const disc = new THREE.Mesh(geometry, material);
