@@ -55,11 +55,9 @@ class Controller {
 
     let board_x = x.toFixed(0);
     let board_y = y.toFixed();
-    
+
     this.board.setBoardGrid(board_x, board_y, 1);
     this.view.makeDisc(x, y, 1);
-
-    
 
     this.renderer.render(this.scene, this.camera);
   }
