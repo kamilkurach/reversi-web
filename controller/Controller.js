@@ -50,17 +50,24 @@ class Controller {
     raycaster.setFromCamera(pointer, this.camera);
 
     let intersects = raycaster.intersectObjects(this.scene.children);
-    let x = intersects[0].object.position.x
-    let y = intersects[0].object.position.y
+    let view_x = intersects[0].object.position.x
+    let view_y = intersects[0].object.position.y
 
-    let board_x = x.toFixed(0);
-    let board_y = y.toFixed();
+    let boardGrid_x = view_x.toFixed(0);
+    let boardGrid_y = view_y.toFixed(0);
 
-    this.board.setBoardGrid(board_x, board_y, 1);
-    this.view.makeDisc(x, y, 1);
+    this.addDisc(view_x, view_y, boardGrid_x, boardGrid_y);
+
+    this.board.printBoardGrid();
 
     this.renderer.render(this.scene, this.camera);
   }
+
+  addDisc(view_x, view_y, boardGrid_x, boardGrid_y) {
+    this.board.setBoardGrid(boardGrid_x, boardGrid_y, 1);
+    this.view.makeDisc(view_x, view_y, 1);
+  }
+
 }
 
 export { Controller };
