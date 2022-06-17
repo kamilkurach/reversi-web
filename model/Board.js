@@ -42,6 +42,105 @@ class Board {
     return playerDiscs;
   }
 
+  findValidMoves(player) {
+    let validMoves = [];
+    let playerDiscs = this.findAllPlayersDiscs(player);
+    playerDiscs.forEach(disc => {
+
+      let horizontalValidMoves = this.searchHorizontal(disc);
+      validMoves.push(horizontalValidMoves);
+
+      let verticallValidMoves = this.searchVertical(disc);
+      validMoves.push(verticallValidMoves);
+
+    });
+    console.log(validMoves);
+    return validMoves;
+  }
+
+  searchHorizontal(disc) {
+    let horizontalValidMoves = [];
+    let boardGrid = this.boardGrid;
+
+    function serachRight(disc) {
+      let x = disc[0];
+      let y = disc[1];
+      let player = boardGrid[x][y];
+
+      for (let i = x; i < 7; i++) {
+        if (boardGrid[i][y] != 0) {
+          if (boardGrid[i][y] != player && boardGrid[i + 1][y] == 0) {
+            let position = [i + 1, y];
+            horizontalValidMoves.push(position);
+            break;
+          }
+        }
+      }
+    }
+
+    function searchLeft(disc) {
+      let x = disc[0];
+      let y = disc[1];
+      let player = boardGrid[x][y];
+
+      for (let i = x; i > 0; i--) {
+        if (boardGrid[i][y] != 0) {
+          if (boardGrid[i][y] != player && boardGrid[i - 1][y] == 0) {
+            let position = [i - 1, y];
+            horizontalValidMoves.push(position);
+            break;
+          }
+        }
+      }
+    };
+
+    serachRight(disc);
+    searchLeft(disc);
+
+    return horizontalValidMoves;
+  }
+
+  searchVertical(disc) {
+    let verticalValidMoves = [];
+    let boardGrid = this.boardGrid;
+
+    function searchUp(disc) {
+      let x = disc[0];
+      let y = disc[1];
+      let player = boardGrid[x][y];
+
+      for (let i = y; i < 7; i++) {
+        if (boardGrid[x][i] != 0) {
+          if (boardGrid[x][i] != player && boardGrid[x][i + 1] == 0) {
+            let position = [x, i + 1];
+            verticalValidMoves.push(position);
+            break;
+          }
+        }
+      }
+    }
+
+    function searchDown(disc) {
+      let x = disc[0];
+      let y = disc[1];
+      let player = boardGrid[x][y];
+
+      for (let i = y; i > 0; i--) {
+        if (boardGrid[x][i] != 0) {
+          if (boardGrid[x][i] != player && boardGrid[x][i - 1] == 0) {
+            let position = [x, i - 1];
+            verticalValidMoves.push(position);
+            break;
+          }
+        }
+      }
+    }
+
+    searchUp(disc);
+    searchDown(disc);
+
+    return verticalValidMoves;
+  }
 }
 
 export { Board };
