@@ -5,7 +5,7 @@ class View {
   scene;
   camera;
   renderer;
-  is3D = true;
+  is3D = false;
 
   constructor() {
     this.scene = new THREE.Scene();
@@ -20,7 +20,7 @@ class View {
     this.rendererSetup();
     this.cameraSetup();
     // this.initDiscs();
-    this.sayHi();
+    // this.sayHi();
   }
 
   sayHi() {
