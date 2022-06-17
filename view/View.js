@@ -166,8 +166,8 @@ class View {
     const board_material = new THREE.MeshBasicMaterial({ color: 0x00000000 });
     const board_lines = new THREE.Mesh(board_geometry, board_material);
     board_lines.name = "board_lines";
-    board_lines.position.x = 3.55;
-    board_lines.position.y = 3.59;
+    board_lines.position.x = 3.57;
+    board_lines.position.y = 3.57;
     board_lines.position.z = - 0.1;
     this.scene.add(board_lines);
 
