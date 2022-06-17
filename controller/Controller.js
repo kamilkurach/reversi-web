@@ -16,13 +16,9 @@ class Controller {
 
   initController() {
     console.log('init Controller class');
-    this.board.initBaord();
-    // this.view.initView();
-    // console.log("init scope " + this.camera);
     document.body.onload = this.view.constructBasicScene();
     this.onPointerMove = this.onPointerMove.bind(this);
     window.addEventListener('click', this.onPointerMove);
-    // this.addRaycaster();
     this.initDiscs();
   }
 
@@ -43,7 +39,6 @@ class Controller {
   };
 
   onPointerMove(event) {
-    // console.log("method scope " + this.camera);
     let raycaster = new THREE.Raycaster();
     let pointer = new THREE.Vector2();
 
@@ -61,6 +56,8 @@ class Controller {
     
     this.board.setBoardGrid(board_x, board_y, 1);
     this.view.makeDisc(x, y, 1);
+
+    
 
     this.renderer.render(this.scene, this.camera);
   }

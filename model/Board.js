@@ -15,7 +15,6 @@ class Board {
 
   initBaord() {
     console.log('init Board class');
-    this.printBoardGrid();
   }
 
   printBoardGrid() {
@@ -28,7 +27,6 @@ class Board {
 
   setBoardGrid(x, y, state) {
     this.boardGrid[x][y] = state;
-    this.printBoardGrid();
   }
 }
 
