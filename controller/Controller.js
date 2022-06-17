@@ -5,6 +5,7 @@ class Controller {
   view;
   camera;
   scene;
+  player;
 
   constructor(board, view) {
     this.board = board;
@@ -12,6 +13,7 @@ class Controller {
     this.camera = view.getCamera();
     this.scene = view.getScene();
     this.renderer = view.getRenderer();
+    this.player = 1;
   }
 
   initController() {
