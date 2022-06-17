@@ -47,14 +47,6 @@ class View {
     this.updateView();
   }
 
-  initDiscs() {
-    this.makeDisc(4.1, 4.1, 1);
-    this.makeDisc(3.1, 4.1, 0);
-    this.makeDisc(3.1, 3.1, 1);
-    this.makeDisc(4.1, 3.1, 0);
-    this.updateView();
-  };
-
   makeDisc(x, y, option) {
     if (option == 0) {
       const geometry = new THREE.CylinderGeometry(0.3, 0.3, 0.5, 32);
