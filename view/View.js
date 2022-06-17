@@ -19,7 +19,6 @@ class View {
     this.sceneSetup();
     this.rendererSetup();
     this.cameraSetup();
-    // this.initDiscs();
     // this.sayHi();
   }
 
