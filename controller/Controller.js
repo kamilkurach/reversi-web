@@ -56,16 +56,16 @@ class Controller {
     let boardGrid_x = view_x.toFixed(0);
     let boardGrid_y = view_y.toFixed(0);
 
-    this.addDisc(view_x, view_y, boardGrid_x, boardGrid_y);
+    this.addDisc(view_x, view_y, boardGrid_x, boardGrid_y, 1);
 
     this.board.printBoardGrid();
 
     this.renderer.render(this.scene, this.camera);
   }
 
-  addDisc(view_x, view_y, boardGrid_x, boardGrid_y) {
-    this.board.setBoardGrid(boardGrid_x, boardGrid_y, 1);
-    this.view.makeDisc(view_x, view_y, 1);
+  addDisc(view_x, view_y, boardGrid_x, boardGrid_y, state) {
+    this.board.setBoardGrid(boardGrid_x, boardGrid_y, state);
+    this.view.makeDisc(view_x, view_y, state);
   }
 
 }
