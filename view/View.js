@@ -96,7 +96,8 @@ class View {
           let square_x = square.position.x.toFixed(0);
           let square_y = square.position.y.toFixed(0);
           if (square_x == x && square_y == y) {
-            square.material.color.set( 0x90EE90 );
+            square.material.color.set( 0x90EE90 ); 
+            square.material.opacity = 0.8; 
           }
         }
       });
@@ -114,6 +115,7 @@ class View {
           let square_y = square.position.y.toFixed(0);
           if (square_x == x && square_y == y) {
             square.material.color.set( 0x405336 );
+            square.material.opacity = 1;
           }
         }
       });
@@ -160,6 +162,7 @@ class View {
         const material = new THREE.MeshBasicMaterial({ color: 0x405336 });
         const cube = new THREE.Mesh(geometry, material);
         cube.name = "square"
+        cube.material.transparent = true;
         this.scene.add(cube);
         cube.position.x = i;
         cube.position.y = j;
