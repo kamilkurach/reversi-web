@@ -5,7 +5,7 @@ class View {
   scene;
   camera;
   renderer;
-  is3D = false;
+  is3D = true;
 
   constructor() {
     this.scene = new THREE.Scene();
