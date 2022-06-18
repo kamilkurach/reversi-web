@@ -64,25 +64,31 @@ class Controller {
     let boardGrid_x = view_x.toFixed(0);
     let boardGrid_y = view_y.toFixed(0);
 
-    this.addDisc(view_x, view_y, boardGrid_x, boardGrid_y, this.player);
+    this.validMoves.forEach(move => {
+      let x = move[0][0];
+      let y = move[0][1];
+      if (boardGrid_x == x && boardGrid_y == y) {
+        this.addDisc(view_x, view_y, boardGrid_x, boardGrid_y, this.player);
 
-    this.view.removeHighlightValidMoves(this.validMoves);
+        this.view.removeHighlightValidMoves(this.validMoves);
     
-    this.board.printBoardGrid();
+        this.board.printBoardGrid();
 
-    if (this.player == 1) {
-      this.player = 2;
-    } else if (this.player == 2) {
-      this.player = 1;
-    }
-    
-    this.validMoves = this.board.findValidMoves(this.player);
-    // console.log("player " + this.player);
-    // console.log(this.validMoves);
-    
-    this.view.highlightValidMoves(this.validMoves);
+        if (this.player == 1) {
+          this.player = 2;
+        } else if (this.player == 2) {
+          this.player = 1;
+        }
+        
+        this.validMoves = this.board.findValidMoves(this.player);
+        // console.log("player " + this.player);
+        // console.log(this.validMoves);
+        
+        this.view.highlightValidMoves(this.validMoves);
 
-    this.renderer.render(this.scene, this.camera);
+        this.renderer.render(this.scene, this.camera);
+      }
+    });
   }
 
   addDisc(view_x, view_y, boardGrid_x, boardGrid_y, state) {
