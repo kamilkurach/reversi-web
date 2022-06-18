@@ -21,13 +21,6 @@ class Board {
     console.table(this.boardGrid);
   }
 
-  printValidMoves(validMoves) {
-    validMoves.forEach(element => {
-      console.log(element[0], element[1]);
-      // this.setBoardGrid(element[0], element[1], 5)
-    });
-  }
-
   getBoardGrid() {
     return this.boardGrid;
   }
