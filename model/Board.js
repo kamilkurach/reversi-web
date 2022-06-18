@@ -46,12 +46,22 @@ class Board {
     let validMoves = [];
     let playerDiscs = this.findAllPlayersDiscs(player);
     playerDiscs.forEach(disc => {
-
+     
       let horizontalValidMoves = this.searchHorizontal(disc);
-      validMoves.push(horizontalValidMoves);
-
+      if (horizontalValidMoves.length != 0) {
+        validMoves.push(horizontalValidMoves);
+      }
+      
       let verticalValidMoves = this.searchVertical(disc);
-      validMoves.push(verticalValidMoves);
+      if (verticalValidMoves.length != 0) {
+        validMoves.push(verticalValidMoves);
+      }
+      
+      let diagonalRightValidMoves = this.searchDiagonalRight(disc);
+      if (diagonalRightValidMoves.length != 0) {
+        validMoves.push(diagonalRightValidMoves);
+      }
+      
 
     });
     console.log(validMoves);
@@ -141,6 +151,54 @@ class Board {
 
     return verticalValidMoves;
   }
+
+  searchDiagonalRight(disc) {
+    let diagonalValidMoves = [];
+    let boardGrid = this.boardGrid;
+
+    function searchUp(disc) {
+      let x = disc[0];
+      let y = disc[1];
+      let player = boardGrid[x][y];
+      let j = y + 1;
+      
+      for (let i = x - 1; i > 0; i--) {
+        if (boardGrid[i][j] != 0) {
+          if (boardGrid[i][j] != player && boardGrid[i - 1][j + 1] == 0) {
+            let position = [i - 1, j + 1];
+            diagonalValidMoves.push(position);
+            break;
+          }
+        } 
+        j++;
+      }
+    }
+
+    function searchDown(disc) {
+      let x = disc[0];
+      let y = disc[1];
+      let player = boardGrid[x][y];
+      let j = y - 1;
+      
+      for (let i = x + 1; i < 7; i++) {
+        if (boardGrid[i][j] != 0) {
+          if (boardGrid[i][j] != player && boardGrid[i + 1][j - 1] == 0) {
+            let position = [i + 1, j - 1];
+            diagonalValidMoves.push(position);
+            break;
+          }
+        } 
+        j--;
+      }
+    }
+
+    searchUp(disc);
+    searchDown(disc);
+
+    return diagonalValidMoves;
+  }
+
+
 }
 
 export { Board };
