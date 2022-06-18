@@ -87,6 +87,40 @@ class View {
     return this.renderer;
   }
 
+  highlightValidMoves(validMoves) {
+    validMoves.forEach(move => {
+      let x = move[0][0];
+      let y = move[0][1];
+      this.scene.children.forEach(square => {
+        if (square.name == "square") {
+          let square_x = square.position.x.toFixed(0);
+          let square_y = square.position.y.toFixed(0);
+          if (square_x == x && square_y == y) {
+            square.material.color.set( 0x90EE90 );
+          }
+        }
+      });
+    });
+    this.updateView();
+  }
+
+  removeHighlightValidMoves(validMoves) {
+    validMoves.forEach(move => {
+      let x = move[0][0];
+      let y = move[0][1];
+      this.scene.children.forEach(square => {
+        if (square.name == "square") {
+          let square_x = square.position.x.toFixed(0);
+          let square_y = square.position.y.toFixed(0);
+          if (square_x == x && square_y == y) {
+            square.material.color.set( 0x405336 );
+          }
+        }
+      });
+    });
+    this.updateView();
+  }
+
   cameraSetup() {
     if (this.is3D == true) {
       // POSITION
@@ -125,7 +159,7 @@ class View {
         const geometry = new THREE.BoxGeometry(1, 1, 0.01);
         const material = new THREE.MeshBasicMaterial({ color: 0x405336 });
         const cube = new THREE.Mesh(geometry, material);
-        cube.name = "square" + " x: " + j.toFixed(2) + " y: " + i.toFixed(2);
+        cube.name = "square"
         this.scene.add(cube);
         cube.position.x = i;
         cube.position.y = j;
