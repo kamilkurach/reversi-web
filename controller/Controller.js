@@ -65,7 +65,7 @@ class Controller {
     let boardGrid_y = view_y.toFixed(0);
 
     this.validMoves.forEach(move => {
-      let x = move[0][0];
+      let x = move[0][0]; // -> check validMoves undefined problem
       let y = move[0][1];
       if (boardGrid_x == x && boardGrid_y == y) {
         this.addDisc(view_x, view_y, boardGrid_x, boardGrid_y, this.player);
