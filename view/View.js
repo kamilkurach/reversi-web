@@ -127,8 +127,8 @@ class View {
         const cube = new THREE.Mesh(geometry, material);
         cube.name = "square" + " x: " + j.toFixed(2) + " y: " + i.toFixed(2);
         this.scene.add(cube);
-        cube.position.x = j;
-        cube.position.y = i;
+        cube.position.x = i;
+        cube.position.y = j;
         cube.position.z = - 0.1;
         j += 0.02;
       }
