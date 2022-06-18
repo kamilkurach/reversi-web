@@ -6,6 +6,7 @@ class Controller {
   camera;
   scene;
   player;
+  validMoves;
 
   constructor(board, view) {
     this.board = board;
@@ -22,6 +23,7 @@ class Controller {
     this.onPointerMove = this.onPointerMove.bind(this);
     window.addEventListener('click', this.onPointerMove);
     this.initDiscs();
+    this.view.highlightValidMoves(this.validMoves);
   }
 
   initDiscs() {
@@ -36,6 +38,10 @@ class Controller {
 
     this.view.makeDisc(4.1, 3.1, 2);
     this.board.setBoardGrid(4, 3, 2);
+
+    this.validMoves = this.board.findValidMoves(this.player);
+    // console.log("player " + this.player);
+    // console.log(this.validMoves);
 
     this.board.printBoardGrid();
 
@@ -58,9 +64,23 @@ class Controller {
     let boardGrid_x = view_x.toFixed(0);
     let boardGrid_y = view_y.toFixed(0);
 
-    this.addDisc(view_x, view_y, boardGrid_x, boardGrid_y, 1);
+    this.addDisc(view_x, view_y, boardGrid_x, boardGrid_y, this.player);
 
+    this.view.removeHighlightValidMoves(this.validMoves);
+    
     this.board.printBoardGrid();
+
+    if (this.player == 1) {
+      this.player = 2;
+    } else if (this.player == 2) {
+      this.player = 1;
+    }
+    
+    this.validMoves = this.board.findValidMoves(this.player);
+    // console.log("player " + this.player);
+    // console.log(this.validMoves);
+    
+    this.view.highlightValidMoves(this.validMoves);
 
     this.renderer.render(this.scene, this.camera);
   }
