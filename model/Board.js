@@ -50,8 +50,8 @@ class Board {
       let horizontalValidMoves = this.searchHorizontal(disc);
       validMoves.push(horizontalValidMoves);
 
-      let verticallValidMoves = this.searchVertical(disc);
-      validMoves.push(verticallValidMoves);
+      let verticalValidMoves = this.searchVertical(disc);
+      validMoves.push(verticalValidMoves);
 
     });
     console.log(validMoves);
