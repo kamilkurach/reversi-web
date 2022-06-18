@@ -21,6 +21,13 @@ class Board {
     console.table(this.boardGrid);
   }
 
+  printValidMoves(validMoves) {
+    validMoves.forEach(element => {
+      console.log(element[0], element[1]);
+      // this.setBoardGrid(element[0], element[1], 5)
+    });
+  }
+
   getBoardGrid() {
     return this.boardGrid;
   }
@@ -46,7 +53,7 @@ class Board {
     let validMoves = [];
     let playerDiscs = this.findAllPlayersDiscs(player);
     playerDiscs.forEach(disc => {
-     
+      // console.log("disc")
       let horizontalValidMoves = this.searchHorizontal(disc);
       if (horizontalValidMoves.length != 0) {
         validMoves.push(horizontalValidMoves);
@@ -61,10 +68,15 @@ class Board {
       if (diagonalRightValidMoves.length != 0) {
         validMoves.push(diagonalRightValidMoves);
       }
-      
 
+      let diagonalLeftValidMoves = this.searchDiagonalLeft(disc);
+      if (diagonalLeftValidMoves.length != 0) {
+        validMoves.push(diagonalLeftValidMoves);
+      } 
     });
-    console.log(validMoves);
+    // validMoves.forEach(element => {
+    //   // console.log(element[0], element[1]);
+    // });
     return validMoves;
   }
 
@@ -198,7 +210,60 @@ class Board {
     return diagonalValidMoves;
   }
 
+  searchDiagonalLeft(disc) {
+    let diagonalValidMoves = [];
+    let boardGrid = this.boardGrid;
 
+    function searchUp(disc) {
+      let x = disc[0];
+      let y = disc[1];
+      let player = boardGrid[x][y];
+      let j = y - 1;
+      
+      for (let i = x - 1; i > 0; i--) {
+        if (boardGrid[i][j] != 0) {
+          if(boardGrid[i][j] == player){
+            break;
+          } else {
+            if (boardGrid[i][j] != player && boardGrid[i - 1][j - 1] == 0) {
+              let position = [i - 1, j - 1];
+              diagonalValidMoves.push(position);
+              break;
+            }
+          }
+          
+        } 
+        j--;
+      }
+    }
+
+    function searchDown(disc) {
+      let x = disc[0];
+      let y = disc[1];
+      let player = boardGrid[x][y];
+      let j = y + 1;
+      
+      for (let i = x + 1; i < 7; i++) {
+        if(boardGrid[i][j] == player){
+          break;
+        } else {
+          if (boardGrid[i][j] != 0) {
+            if (boardGrid[i][j] != player && boardGrid[i + 1][j + 1] == 0) {
+              let position = [i + 1, j + 1];
+              diagonalValidMoves.push(position);
+              break;
+            }
+          }
+        }
+        j++;
+      }
+    }
+
+    searchUp(disc);
+    searchDown(disc);
+
+    return diagonalValidMoves;
+  }
 }
 
 export { Board };
