@@ -46,12 +46,14 @@ class View {
     this.updateView();
   }
 
-  makeDisc(x, y, option) {
+  makeDisc(x, y, boardGrid_x, boardGrid_y, option) {
     if (option == 1) {
       const geometry = new THREE.CylinderGeometry(0.3, 0.3, 0.5, 32);
       const material = new THREE.MeshBasicMaterial({ color: 0x000000 });
       const disc = new THREE.Mesh(geometry, material);
       disc.name = "disc";
+      disc.boardGrid_x = boardGrid_x;
+      disc.boardGrid_y = boardGrid_y;
       this.scene.add(disc);
       disc.position.x = x;
       disc.position.y = y;
@@ -62,6 +64,8 @@ class View {
       const material = new THREE.MeshBasicMaterial({ color: 0xFFFFFF });
       const disc = new THREE.Mesh(geometry, material);
       disc.name = "disc";
+      disc.boardGrid_x = boardGrid_x;
+      disc.boardGrid_y = boardGrid_y;
       this.scene.add(disc);
       disc.position.x = x;
       disc.position.y = y;
@@ -70,12 +74,12 @@ class View {
     }
   }
 
-  removeDisc(x, y) {
+  removeDisc(boardGrid_x, boardGrid_y) {
       this.scene.children.forEach(disc => {
         if (disc.name == "disc") {
-          let disc_x = disc.position.x.toFixed(0);
-          let disc_y = disc.position.y.toFixed(0);
-          if (disc_x == x && disc_y == y) {
+          let disc_x = disc.boardGrid_x;
+          let disc_y = disc.boardGrid_y;
+          if (disc_x == boardGrid_x && disc_y == boardGrid_y) {
             this.scene.remove(disc);
           }
         }
