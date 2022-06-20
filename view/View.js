@@ -124,8 +124,8 @@ class View {
 
   highlightValidMoves(validMoves) {
     validMoves.forEach(move => {
-      let x = move[0][0];
-      let y = move[0][1];
+      let x = move[0];
+      let y = move[1];
       this.scene.children.forEach(square => {
         if (square.name == "square") {
           let square_x = square.position.x.toFixed(0);
@@ -142,8 +142,8 @@ class View {
 
   removeHighlightValidMoves(validMoves) {
     validMoves.forEach(move => {
-      let x = move[0][0];
-      let y = move[0][1];
+      let x = move[0];
+      let y = move[1];
       this.scene.children.forEach(square => {
         if (square.name == "square") {
           let square_x = square.position.x.toFixed(0);
