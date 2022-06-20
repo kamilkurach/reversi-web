@@ -51,7 +51,7 @@ class View {
       const geometry = new THREE.CylinderGeometry(0.3, 0.3, 0.5, 32);
       const material = new THREE.MeshBasicMaterial({ color: 0x000000 });
       const disc = new THREE.Mesh(geometry, material);
-      disc.name = "black_disc" + " x: " + x + " y: " + y;
+      disc.name = "disc";
       this.scene.add(disc);
       disc.position.x = x;
       disc.position.y = y;
@@ -61,7 +61,7 @@ class View {
       const geometry = new THREE.CylinderGeometry(0.3, 0.3, 0.5, 32);
       const material = new THREE.MeshBasicMaterial({ color: 0xFFFFFF });
       const disc = new THREE.Mesh(geometry, material);
-      disc.name = "white_disc" + " x: " + x + " y: " + y;
+      disc.name = "disc";
       this.scene.add(disc);
       disc.position.x = x;
       disc.position.y = y;
