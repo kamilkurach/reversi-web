@@ -70,6 +70,19 @@ class View {
     }
   }
 
+  removeDisc(x, y) {
+      this.scene.children.forEach(disc => {
+        if (disc.name == "disc") {
+          let disc_x = disc.position.x.toFixed(0);
+          let disc_y = disc.position.y.toFixed(0);
+          if (disc_x == x && disc_y == y) {
+            this.scene.remove(disc);
+          }
+        }
+      });
+    this.updateView();
+  }
+
   sceneSetup() {
     this.scene.background = new THREE.Color(0xc6e4ee);
   }

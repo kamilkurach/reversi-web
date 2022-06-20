@@ -96,6 +96,12 @@ class Controller {
     this.view.makeDisc(view_x, view_y, state);
   }
 
+  removeDisc(view_x, view_y, boardGrid_x, boardGrid_y) {
+    let state = 0;
+    this.board.setBoardGrid(boardGrid_x, boardGrid_y, state);
+    this.view.removeDisc(view_x, view_y);
+  }
+
 }
 
 export { Controller };
