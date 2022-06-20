@@ -39,7 +39,7 @@ class Controller {
     this.validMoves = this.searchResult[0];
     
     this.pairs = this.searchResult[1];
-    
+
     this.board.printBoardGrid();
 
     this.view.updateView();
@@ -64,8 +64,8 @@ class Controller {
     let boardGrid_y = view_y.toFixed(0);
 
     this.validMoves.forEach(move => {
-      let x = move[0][0]; // -> check validMoves undefined problem
-      let y = move[0][1];
+      let x = move[0]; // -> check validMoves undefined problem
+      let y = move[1];
       if (boardGrid_x == x && boardGrid_y == y) {
 
         // current player
@@ -75,14 +75,16 @@ class Controller {
         
         //  flip disc/discs
         this.pairs.forEach(element => {
-          let key = element[0][1];
+          let key = element[1];
           let x_in_key = key[0][0];
           let y_in_key = key[0][1];
-      
+          
+          console.log(x_in_key, boardGrid_x , y_in_key, boardGrid_y, this.pairs);
+
           if (x_in_key == boardGrid_x && y_in_key == boardGrid_y) {
-            let discsToFlip = element[0].slice(3);
+            let discsToFlip = element.slice(3)[0];
             discsToFlip.forEach(disc => {
-              this.flipDisc(disc[0][0], disc[0][1], this.player);
+              this.flipDisc(disc[0], disc[1], this.player);
             });
           }
         });
@@ -99,10 +101,12 @@ class Controller {
 
         // new player 
         
-        this.validMoves = this.board.findValidMoves(this.player);
-      
-        this.pairs = this.board.findValidMoves(this.player)[1][0];
-        
+        this.searchResult = this.board.findValidMoves(this.player);
+
+        this.validMoves = this.searchResult[0];
+    
+        this.pairs = this.searchResult[1];
+
         this.view.highlightValidMoves(this.validMoves);
 
         this.board.printBoardGrid();

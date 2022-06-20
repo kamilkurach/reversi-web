@@ -50,14 +50,25 @@ class Board {
     playerDiscs.forEach(disc => {
       let horizontalValidMoves = this.searchHorizontal(disc);
       if (horizontalValidMoves.length != 0) {
-        validMoves.push(horizontalValidMoves[0]);
-        pairs.push(horizontalValidMoves[1]);
+        horizontalValidMoves[0].forEach(element => {
+          validMoves.push(element);
+        });
+        
+        horizontalValidMoves[1].forEach(element => {
+          pairs.push(element);
+        });
       }
       
-      // let verticalValidMoves = this.searchVertical(disc);
-      // if (verticalValidMoves.length != 0) {
-      //   validMoves.push(verticalValidMoves);
-      // }
+      let verticalValidMoves = this.searchVertical(disc);
+      if (verticalValidMoves.length != 0) {
+        verticalValidMoves[0].forEach(element => {
+          validMoves.push(element);
+        });
+        
+        verticalValidMoves[1].forEach(element => {
+          pairs.push(element);
+        });
+      }
       
       // let diagonalRightValidMoves = this.searchDiagonalRight(disc);
       // if (diagonalRightValidMoves.length != 0) {
@@ -72,6 +83,7 @@ class Board {
     // validMoves.forEach(element => {
     //   // console.log(element[0], element[1]);
     // });
+    
     return [validMoves, pairs];
   }
 
@@ -144,6 +156,11 @@ class Board {
 
   searchVertical(disc) {
     let verticalValidMoves = [];
+    let verticalValidMovesUp = [];
+    let verticalDiscToFlipUp = [];
+    let verticalDiscToFlipDown = [];
+    let verticalValidMovesDown = [];
+    let pairs = [];
     let boardGrid = this.boardGrid;
 
     function searchUp(disc) {
@@ -153,9 +170,14 @@ class Board {
 
       for (let i = y; i < 7; i++) {
         if (boardGrid[x][i] != 0) {
+          if (boardGrid[x][i] != player) {
+            let discToFlip = [x, i];
+            verticalDiscToFlipUp.push(discToFlip);
+          }
           if (boardGrid[x][i] != player && boardGrid[x][i + 1] == 0) {
             let position = [x, i + 1];
             verticalValidMoves.push(position);
+            verticalValidMovesUp.push(position);
             break;
           }
         }
@@ -169,9 +191,14 @@ class Board {
 
       for (let i = y; i > 0; i--) {
         if (boardGrid[x][i] != 0) {
+          if (boardGrid[x][i] != player) {
+            let discToFlip = [x, i];
+            verticalDiscToFlipDown.push(discToFlip);
+          }
           if (boardGrid[x][i] != player && boardGrid[x][i - 1] == 0) {
             let position = [x, i - 1];
             verticalValidMoves.push(position);
+            verticalValidMovesDown.push(position);
             break;
           }
         }
@@ -181,7 +208,17 @@ class Board {
     searchUp(disc);
     searchDown(disc);
 
-    return verticalValidMoves;
+    if (verticalValidMovesUp.length != 0 ) {
+      let pair = ["key", verticalValidMovesUp, "value", verticalDiscToFlipUp]
+      pairs.push(pair);
+    } 
+    
+    if (verticalValidMovesDown.length != 0) {
+      let pair = ["key", verticalValidMovesDown, "value", verticalDiscToFlipDown]
+      pairs.push(pair);
+    }
+
+    return [verticalValidMoves, pairs];
   }
 
   searchDiagonalRight(disc) {
