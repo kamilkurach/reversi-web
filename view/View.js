@@ -87,6 +87,24 @@ class View {
     this.updateView();
   }
 
+  changeStateOfDisc(boardGrid_x, boardGrid_y, player) {
+    // to be replaced by flip animation 
+    this.scene.children.forEach(disc => {
+      if (disc.name == "disc") {
+        let disc_x = disc.boardGrid_x;
+        let disc_y = disc.boardGrid_y;
+        if (disc_x == boardGrid_x && disc_y == boardGrid_y) {
+          if (player == 1) {
+            disc.material.color.set( 0x000000 );
+          } else if (player == 2) {
+            disc.material.color.set( 0xFFFFFF );
+          }
+        }
+      }
+    });
+  this.updateView();
+}
+
   sceneSetup() {
     this.scene.background = new THREE.Color(0xc6e4ee);
   }
