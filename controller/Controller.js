@@ -34,6 +34,13 @@ class Controller {
     this.view.updateView();
   }
 
+  calcPointsForPlayers() {
+    this.board.calcPoints(1);
+    this.board.calcPoints(2);
+    console.log("player_1_points (balck): " + this.board.player_1_points +
+     " " + "player_2_points (white): " + this.board.player_2_points);
+  }
+
   initDiscs() {
     this.addDisc(3.1, 3.1, 3, 3, 1);
     this.addDisc(4.1, 3.1, 4, 3, 2);
@@ -99,7 +106,10 @@ class Controller {
         this.randomPlay();
         this.start();
         if (this.board.validMoves.length == 0) {
-          window.location.reload();
+          this.calcPointsForPlayers();
+          setTimeout(() => {
+            window.location.reload();
+          }, 5000);
         }
       }
     }, 1500);

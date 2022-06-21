@@ -12,6 +12,8 @@ class Board {
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
   ]
+  player_1_points;
+  player_2_points;
 
   constructor() {
     this.initBaord();
@@ -19,6 +21,8 @@ class Board {
 
   initBaord(player) {
     this.recalcBoard(player);
+    this.calcPoints(1);
+    this.calcPoints(2);
     console.log('init Board class');
   }
 
@@ -26,6 +30,14 @@ class Board {
     this.searchResult = this.findValidMoves(player);
     this.validMoves = this.searchResult[0];
     this.pairs = this.searchResult[1];
+  }
+
+  calcPoints(player) {
+    if (player == 1) {
+      this.player_1_points = this.findAllPlayersDiscs(1).length;
+    } else if (player == 2) {
+      this.player_2_points = this.findAllPlayersDiscs(2).length;
+    }
   }
 
   printBoardGrid() {
