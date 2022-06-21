@@ -91,15 +91,15 @@ class View {
   }
 
   removeDisc(boardGrid_x, boardGrid_y) {
-      this.scene.children.forEach(disc => {
-        if (disc.name == "disc") {
-          let disc_x = disc.boardGrid_x;
-          let disc_y = disc.boardGrid_y;
-          if (disc_x == boardGrid_x && disc_y == boardGrid_y) {
-            this.scene.remove(disc);
-          }
+    this.scene.children.forEach(disc => {
+      if (disc.name == "disc") {
+        let disc_x = disc.boardGrid_x;
+        let disc_y = disc.boardGrid_y;
+        if (disc_x == boardGrid_x && disc_y == boardGrid_y) {
+          this.scene.remove(disc);
         }
-      });
+      }
+    });
     this.updateView();
   }
 
@@ -120,15 +120,15 @@ class View {
         let disc_y = disc.boardGrid_y;
         if (disc_x == boardGrid_x && disc_y == boardGrid_y) {
           if (player == 1) {
-            disc.material.color.set( 0x000000 );
+            disc.material.color.set(0x000000);
           } else if (player == 2) {
-            disc.material.color.set( 0xFFFFFF );
+            disc.material.color.set(0xFFFFFF);
           }
         }
       }
     });
-  this.updateView();
-}
+    this.updateView();
+  }
 
   sceneSetup() {
     this.scene.background = new THREE.Color(0xc6e4ee);
@@ -157,12 +157,12 @@ class View {
           let square_y = square.position.y.toFixed(0);
           if (square_x == x && square_y == y) {
             if (player == 1) {
-              square.material.color.set( 0x90EE90 ); 
-              square.material.opacity = 0.7; 
+              square.material.color.set(0x90EE90);
+              square.material.opacity = 0.7;
             } else if (player == 2) {
-              square.material.color.set( 0xff9248 ); 
-              square.material.opacity = 0.7; 
-            } 
+              square.material.color.set(0xff9248);
+              square.material.opacity = 0.7;
+            }
           }
         }
       });
@@ -179,7 +179,7 @@ class View {
           let square_x = square.position.x.toFixed(0);
           let square_y = square.position.y.toFixed(0);
           if (square_x == x && square_y == y) {
-            square.material.color.set( 0x405336 );
+            square.material.color.set(0x405336);
             square.material.opacity = 1;
           }
         }
