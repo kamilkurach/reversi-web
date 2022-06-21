@@ -9,6 +9,7 @@ class Controller {
   validMoves;
   pairs;
   searchResult;
+  isGameInterrupted = false;
 
   constructor(board, view) {
     this.board = board;
@@ -42,6 +43,8 @@ class Controller {
 
   onPointerMove(event) {
     console.clear();
+
+    this.isGameInterrupted = true;
 
     let raycaster = new THREE.Raycaster();
     let pointer = new THREE.Vector2();
@@ -92,10 +95,12 @@ class Controller {
 
   start() {
     setTimeout(() => {
-      this.randomPlay();
-      this.start();
-      if (this.board.validMoves.length == 0) {
-        window.location.reload();
+      if (this.isGameInterrupted != true) {
+        this.randomPlay();
+        this.start();
+        if (this.board.validMoves.length == 0) {
+          window.location.reload();
+        }
       }
     }, 3500);
   }
