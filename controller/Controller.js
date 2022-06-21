@@ -29,7 +29,7 @@ class Controller {
     this.initDiscs();
     this.board.recalcBoard(this.player);
     this.view.highlightValidMoves(this.board.validMoves, this.player);
-    // this.start();
+    this.start();
     this.view.updateView();
   }
 
@@ -67,7 +67,7 @@ class Controller {
         this.addDisc(view_x, view_y, boardGrid_x, boardGrid_y, this.player);
 
         this.view.removeHighlightValidMoves(this.board.validMoves, this.player);
-        
+
         //  flip disc/discs
         this.flip(boardGrid_x, boardGrid_y, this.player);
 
@@ -76,7 +76,7 @@ class Controller {
         this.changePlayer();
 
         // new player 
-        
+
         this.board.recalcBoard(this.player);
 
         this.view.highlightValidMoves(this.board.validMoves, this.player);
@@ -97,7 +97,7 @@ class Controller {
       if (this.board.validMoves.length == 0) {
         window.location.reload();
       }
-    }, 3500); 
+    }, 3500);
   }
 
   reset() {
@@ -111,9 +111,9 @@ class Controller {
   }
 
   randomPlay() {
-    
+
     if (this.board.validMoves.length != 0) {
-      
+
       let view_x = this.board.validMoves[0][0] + this.board.validMoves[0][0] * 0.02;
       let view_y = this.board.validMoves[0][1] + this.board.validMoves[0][1] * 0.02;
 
@@ -129,7 +129,7 @@ class Controller {
           this.addDisc(view_x, view_y, boardGrid_x, boardGrid_y, this.player);
 
           this.view.removeHighlightValidMoves(this.board.validMoves, this.player);
-          
+
           //  flip disc/discs
           this.flip(boardGrid_x, boardGrid_y, this.player);
 
@@ -138,7 +138,7 @@ class Controller {
           this.changePlayer();
 
           // new player 
-          
+
           this.board.recalcBoard(this.player);
 
           this.view.highlightValidMoves(this.board.validMoves, this.player);
@@ -150,7 +150,7 @@ class Controller {
           break;
         }
       };
-    } 
+    }
   }
 
   changePlayer() {
@@ -182,7 +182,7 @@ class Controller {
       let key = element[1];
       let x_in_key = key[0][0];
       let y_in_key = key[0][1];
-      
+
       if (x_in_key == boardGrid_x && y_in_key == boardGrid_y) {
         let discsToFlip = element.slice(3)[0];
         discsToFlip.forEach(disc => {
