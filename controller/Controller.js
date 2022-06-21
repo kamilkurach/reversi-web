@@ -84,16 +84,12 @@ class Controller {
         this.flip(boardGrid_x, boardGrid_y, this.player);
 
         // change player
-
         this.changePlayer();
 
         // new player 
-
         this.board.recalcBoard(this.player);
 
         this.view.highlightValidMoves(this.board.validMoves, this.player);
-
-        // this.board.printBoardGrid();
 
         this.renderer.render(this.scene, this.camera);
 
@@ -153,16 +149,12 @@ class Controller {
           this.flip(boardGrid_x, boardGrid_y, this.player);
 
           // change player
-
           this.changePlayer();
 
           // new player 
-
           this.board.recalcBoard(this.player);
 
           this.view.highlightValidMoves(this.board.validMoves, this.player);
-
-          // this.board.printBoardGrid();
 
           this.renderer.render(this.scene, this.camera);
 
