@@ -40,8 +40,6 @@ class Controller {
     
     this.pairs = this.searchResult[1];
 
-    this.board.printBoardGrid();
-
     this.view.updateView();
   };
 
@@ -64,7 +62,7 @@ class Controller {
     let boardGrid_y = view_y.toFixed(0);
 
     this.validMoves.forEach(move => {
-      let x = move[0]; // -> check validMoves undefined problem
+      let x = move[0];
       let y = move[1];
       if (boardGrid_x == x && boardGrid_y == y) {
 
@@ -88,8 +86,6 @@ class Controller {
             });
           }
         });
-
-        this.board.printBoardGrid();
 
         if (this.player == 1) {
           this.player = 2;
