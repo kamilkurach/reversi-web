@@ -5,10 +5,11 @@ import { Board } from './model/Board.js';
 let TODO =
 "VERSION: random play (v1.0)" + '\n' + '\n' +
 "-- TODO --" + '\n' + '\n' +
-"1) make black and white discs (merge mesh)" + '\n' +
-"2) disc flip animation" + '\n' + 
-"3) fix camera" + '\n'  + 
-"4) points visualizer"
+"* fix disc mesh lines click" + '\n' +
+"* make black and white discs (merge mesh)" + '\n' +
+"* disc flip animation" + '\n' + 
+"* fix camera" + '\n'  + 
+"* points visualizer"
 
 
 function initGame() {
