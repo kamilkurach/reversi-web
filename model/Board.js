@@ -1,4 +1,7 @@
 class Board {
+  searchResult;
+  validMoves;
+  pairs;
   boardGrid = [
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
@@ -11,10 +14,18 @@ class Board {
   ]
 
   constructor() {
+    this.initBaord();
+  };
+
+  initBaord(player) {
+    this.recalcBoard(player);
+    console.log('init Board class');
   }
 
-  initBaord() {
-    console.log('init Board class');
+  recalcBoard(player) {
+    this.searchResult = this.findValidMoves(player);
+    this.validMoves = this.searchResult[0];
+    this.pairs = this.searchResult[1];
   }
 
   printBoardGrid() {
