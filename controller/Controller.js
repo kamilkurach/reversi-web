@@ -23,7 +23,6 @@ class Controller {
 
   initController() {
     console.log('init Controller class');
-    console.log("VERSION: random play (v1.0)");
     document.body.onload = this.view.constructBasicScene();
     this.onPointerMove = this.onPointerMove.bind(this);
     window.addEventListener('click', this.onPointerMove);
