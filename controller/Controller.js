@@ -61,7 +61,7 @@ class Controller {
     let boardGrid_x = view_x.toFixed(0);
     let boardGrid_y = view_y.toFixed(0);
 
-    this.validMoves.forEach(move => {
+    for (let move of this.validMoves) {
       let x = move[0];
       let y = move[1];
       if (boardGrid_x == x && boardGrid_y == y) {
@@ -87,13 +87,7 @@ class Controller {
 
         // change player
 
-        if (this.player == 1) {
-          this.player = 2;
-          this.pairs = [];
-        } else if (this.player == 2) {
-          this.player = 1;
-          this.pairs = [];
-        }
+        this.changePlayer();
 
         // new player 
         
@@ -108,8 +102,18 @@ class Controller {
         this.board.printBoardGrid();
 
         this.renderer.render(this.scene, this.camera);
+
+        break;
       }
-    });
+    };
+  }
+
+  changePlayer() {
+    if (this.player == 1) {
+      this.player = 2;
+    } else if (this.player == 2) {
+      this.player = 1;
+    }
   }
 
   addDisc(view_x, view_y, boardGrid_x, boardGrid_y, state) {
