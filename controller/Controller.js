@@ -102,7 +102,7 @@ class Controller {
           window.location.reload();
         }
       }
-    }, 3500);
+    }, 1500);
   }
 
   reset() {
@@ -119,8 +119,10 @@ class Controller {
 
     if (this.board.validMoves.length != 0) {
 
-      let view_x = this.board.validMoves[0][0] + this.board.validMoves[0][0] * 0.02;
-      let view_y = this.board.validMoves[0][1] + this.board.validMoves[0][1] * 0.02;
+      let pickedMove = Math.floor(Math.random() * this.board.validMoves.length);
+      
+      let view_x = this.board.validMoves[pickedMove][0] + this.board.validMoves[pickedMove][0] * 0.02;
+      let view_y = this.board.validMoves[pickedMove][1] + this.board.validMoves[pickedMove][1] * 0.02;
 
       let boardGrid_x = view_x.toFixed(0);
       let boardGrid_y = view_y.toFixed(0);
