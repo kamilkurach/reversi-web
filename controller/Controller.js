@@ -29,7 +29,7 @@ class Controller {
     this.initDiscs();
     this.board.recalcBoard(this.player);
     this.view.highlightValidMoves(this.board.validMoves, this.player);
-    this.start();
+    // this.start();
     this.view.updateView();
   }
 
@@ -69,18 +69,7 @@ class Controller {
         this.view.removeHighlightValidMoves(this.board.validMoves, this.player);
         
         //  flip disc/discs
-        this.board.pairs.forEach(element => {
-          let key = element[1];
-          let x_in_key = key[0][0];
-          let y_in_key = key[0][1];
-          
-          if (x_in_key == boardGrid_x && y_in_key == boardGrid_y) {
-            let discsToFlip = element.slice(3)[0];
-            discsToFlip.forEach(disc => {
-              this.flipDisc(disc[0], disc[1], this.player);
-            });
-          }
-        });
+        this.flip(boardGrid_x, boardGrid_y, this.player);
 
         // change player
 
@@ -143,7 +132,7 @@ class Controller {
           
           //  flip disc/discs
           this.flip(boardGrid_x, boardGrid_y, this.player);
-          
+
           // change player
 
           this.changePlayer();
