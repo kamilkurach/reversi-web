@@ -87,6 +87,15 @@ class View {
     this.updateView();
   }
 
+  removeAllDiscs() {
+    this.scene.children.forEach(disc => {
+      if (disc.name == "disc") {
+        this.scene.remove(disc);
+      }
+    });
+    this.updateView();
+  }
+
   changeStateOfDisc(boardGrid_x, boardGrid_y, player) {
     // to be replaced by flip animation 
     this.scene.children.forEach(disc => {

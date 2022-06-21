@@ -29,6 +29,19 @@ class Board {
     this.boardGrid[x][y] = state;
   }
 
+  resetBoard() {
+    this.boardGrid = [
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+    ]
+  }
+
   findAllPlayersDiscs(player) {
     let playerDiscs = [];
     for (let i = 0; i < 8; i++) {

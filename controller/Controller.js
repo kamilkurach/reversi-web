@@ -40,6 +40,8 @@ class Controller {
     
     this.pairs = this.searchResult[1];
 
+    this.start();
+
     this.view.updateView();
   };
 
@@ -99,13 +101,93 @@ class Controller {
 
         this.view.highlightValidMoves(this.validMoves, this.player);
 
-        this.board.printBoardGrid();
+        // this.board.printBoardGrid();
 
         this.renderer.render(this.scene, this.camera);
 
         break;
       }
     };
+  }
+
+  start() {
+    setTimeout(() => {
+      this.randomPlay();
+      this.start();
+      if (this.validMoves.length == 0) {
+        window.location.reload();
+      }
+    }, 1500); 
+  }
+
+  reset() {
+    this.player = 1;
+    this.board.resetBoard();
+    this.view.removeAllDiscs();
+    this.initDiscs();
+    this.searchResult = this.board.findValidMoves(this.player);
+    this.validMoves = this.searchResult[0];
+    this.pairs = this.searchResult[1];
+    this.view.highlightValidMoves(this.validMoves, this.player);
+    this.view.updateView();
+  }
+
+  randomPlay() {
+    
+    if (this.validMoves.length != 0) {
+      
+      let view_x = this.validMoves[0][0] + this.validMoves[0][0] * 0.02;
+      let view_y = this.validMoves[0][1] + this.validMoves[0][1] * 0.02;
+
+      let boardGrid_x = view_x.toFixed(0);
+      let boardGrid_y = view_y.toFixed(0);
+
+      for (let move of this.validMoves) {
+        let x = move[0];
+        let y = move[1];
+        if (boardGrid_x == x && boardGrid_y == y) {
+
+          // current player
+          this.addDisc(view_x, view_y, boardGrid_x, boardGrid_y, this.player);
+
+          this.view.removeHighlightValidMoves(this.validMoves, this.player);
+          
+          //  flip disc/discs
+          this.pairs.forEach(element => {
+            let key = element[1];
+            let x_in_key = key[0][0];
+            let y_in_key = key[0][1];
+            
+            if (x_in_key == boardGrid_x && y_in_key == boardGrid_y) {
+              let discsToFlip = element.slice(3)[0];
+              discsToFlip.forEach(disc => {
+                this.flipDisc(disc[0], disc[1], this.player);
+              });
+            }
+          });
+
+          // change player
+
+          this.changePlayer();
+
+          // new player 
+          
+          this.searchResult = this.board.findValidMoves(this.player);
+
+          this.validMoves = this.searchResult[0];
+      
+          this.pairs = this.searchResult[1];
+
+          this.view.highlightValidMoves(this.validMoves, this.player);
+
+          // this.board.printBoardGrid();
+
+          this.renderer.render(this.scene, this.camera);
+
+          break;
+        }
+      };
+    } 
   }
 
   changePlayer() {
