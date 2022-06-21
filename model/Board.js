@@ -2,6 +2,9 @@ class Board {
   searchResult;
   validMoves;
   pairs;
+  player_1_points;
+  player_2_points;
+
   boardGrid = [
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
@@ -12,8 +15,6 @@ class Board {
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
   ]
-  player_1_points;
-  player_2_points;
 
   constructor() {
     this.initBaord();
@@ -128,10 +129,10 @@ class Board {
           pairs.push(element);
         });
 
-      } 
+      }
 
     });
-    
+
     return [validMoves, pairs];
   }
 
