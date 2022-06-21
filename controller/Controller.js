@@ -120,7 +120,7 @@ class Controller {
     if (this.board.validMoves.length != 0) {
 
       let pickedMove = Math.floor(Math.random() * this.board.validMoves.length);
-      
+
       let view_x = this.board.validMoves[pickedMove][0] + this.board.validMoves[pickedMove][0] * 0.02;
       let view_y = this.board.validMoves[pickedMove][1] + this.board.validMoves[pickedMove][1] * 0.02;
 
