@@ -9,7 +9,7 @@ class Controller {
   validMoves;
   pairs;
   searchResult;
-  isGameInterrupted = false;
+  isGameInterrupted;
 
   constructor(board, view) {
     this.board = board;
@@ -18,10 +18,12 @@ class Controller {
     this.scene = view.getScene();
     this.renderer = view.getRenderer();
     this.player = 1;
+    this.isGameInterrupted = false;
   }
 
   initController() {
     console.log('init Controller class');
+    console.log("VERSION: random play (v1.0)");
     document.body.onload = this.view.constructBasicScene();
     this.onPointerMove = this.onPointerMove.bind(this);
     window.addEventListener('click', this.onPointerMove);
