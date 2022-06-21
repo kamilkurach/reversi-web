@@ -48,9 +48,17 @@ class View {
 
   makeDisc(x, y, boardGrid_x, boardGrid_y, option) {
     if (option == 1) {
-      const geometry = new THREE.CylinderGeometry(0.3, 0.3, 0.5, 32);
+      const geometry = new THREE.CylinderGeometry(0.3, 0.3, 0.15, 50);
       const material = new THREE.MeshBasicMaterial({ color: 0x000000 });
       const disc = new THREE.Mesh(geometry, material);
+      const edges = new THREE.EdgesGeometry(geometry);
+      const disc_edges = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x2a2a2a }));
+      disc_edges.name = "disc_edges";
+      this.scene.add(disc_edges);
+      disc_edges.position.x = x;
+      disc_edges.position.y = y;
+      disc_edges.position.z = 0;
+      disc_edges.rotation.x = -1.5;
       disc.name = "disc";
       disc.boardGrid_x = boardGrid_x;
       disc.boardGrid_y = boardGrid_y;
@@ -60,9 +68,17 @@ class View {
       disc.position.z = 0;
       disc.rotation.x = -1.5;
     } else if (option == 2) {
-      const geometry = new THREE.CylinderGeometry(0.3, 0.3, 0.5, 32);
+      const geometry = new THREE.CylinderGeometry(0.3, 0.3, 0.15, 50);
       const material = new THREE.MeshBasicMaterial({ color: 0xFFFFFF });
       const disc = new THREE.Mesh(geometry, material);
+      const edges = new THREE.EdgesGeometry(geometry);
+      const disc_edges = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x2a2a2a }));
+      disc_edges.name = "disc_edges";
+      this.scene.add(disc_edges);
+      disc_edges.position.x = x;
+      disc_edges.position.y = y;
+      disc_edges.position.z = 0;
+      disc_edges.rotation.x = -1.5;
       disc.name = "disc";
       disc.boardGrid_x = boardGrid_x;
       disc.boardGrid_y = boardGrid_y;
