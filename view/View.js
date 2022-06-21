@@ -122,7 +122,7 @@ class View {
     return this.renderer;
   }
 
-  highlightValidMoves(validMoves) {
+  highlightValidMoves(validMoves, player) {
     validMoves.forEach(move => {
       let x = move[0];
       let y = move[1];
@@ -131,8 +131,13 @@ class View {
           let square_x = square.position.x.toFixed(0);
           let square_y = square.position.y.toFixed(0);
           if (square_x == x && square_y == y) {
-            square.material.color.set( 0x90EE90 ); 
-            square.material.opacity = 0.8; 
+            if (player == 1) {
+              square.material.color.set( 0x90EE90 ); 
+              square.material.opacity = 0.7; 
+            } else if (player == 2) {
+              square.material.color.set( 0xff9248 ); 
+              square.material.opacity = 0.7; 
+            } 
           }
         }
       });

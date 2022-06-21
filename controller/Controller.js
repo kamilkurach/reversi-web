@@ -25,7 +25,7 @@ class Controller {
     this.onPointerMove = this.onPointerMove.bind(this);
     window.addEventListener('click', this.onPointerMove);
     this.initDiscs();
-    this.view.highlightValidMoves(this.validMoves);
+    this.view.highlightValidMoves(this.validMoves, this.player);
   }
 
   initDiscs() {
@@ -69,7 +69,7 @@ class Controller {
         // current player
         this.addDisc(view_x, view_y, boardGrid_x, boardGrid_y, this.player);
 
-        this.view.removeHighlightValidMoves(this.validMoves);
+        this.view.removeHighlightValidMoves(this.validMoves, this.player);
         
         //  flip disc/discs
         this.pairs.forEach(element => {
@@ -77,8 +77,6 @@ class Controller {
           let x_in_key = key[0][0];
           let y_in_key = key[0][1];
           
-          console.log(x_in_key, boardGrid_x , y_in_key, boardGrid_y, this.pairs);
-
           if (x_in_key == boardGrid_x && y_in_key == boardGrid_y) {
             let discsToFlip = element.slice(3)[0];
             discsToFlip.forEach(disc => {
@@ -86,6 +84,8 @@ class Controller {
             });
           }
         });
+
+        // change player
 
         if (this.player == 1) {
           this.player = 2;
@@ -103,7 +103,7 @@ class Controller {
     
         this.pairs = this.searchResult[1];
 
-        this.view.highlightValidMoves(this.validMoves);
+        this.view.highlightValidMoves(this.validMoves, this.player);
 
         this.board.printBoardGrid();
 
