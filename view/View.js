@@ -54,7 +54,7 @@ class View {
       const edges = new THREE.EdgesGeometry(geometry);
       const disc_edges = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x2a2a2a }));
       disc_edges.name = "disc_edges";
-      this.scene.add(disc_edges);
+      // this.scene.add(disc_edges);
       disc_edges.position.x = x;
       disc_edges.position.y = y;
       disc_edges.position.z = 0;
@@ -74,7 +74,7 @@ class View {
       const edges = new THREE.EdgesGeometry(geometry);
       const disc_edges = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x2a2a2a }));
       disc_edges.name = "disc_edges";
-      this.scene.add(disc_edges);
+      // this.scene.add(disc_edges);
       disc_edges.position.x = x;
       disc_edges.position.y = y;
       disc_edges.position.z = 0;
@@ -158,6 +158,7 @@ class View {
           }
           disc.position.z = 0;
           disc.rotation.z = 0;
+          this.updateView();
         }
     })();
   }
