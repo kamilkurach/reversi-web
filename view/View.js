@@ -120,14 +120,46 @@ class View {
         let disc_y = disc.boardGrid_y;
         if (disc_x == boardGrid_x && disc_y == boardGrid_y) {
           if (player == 1) {
-            disc.material.color.set(0x000000);
+            this.animate(disc, player);
           } else if (player == 2) {
-            disc.material.color.set(0xFFFFFF);
+            this.animate(disc, player);
           }
         }
       }
     });
     this.updateView();
+  }
+
+  animate(disc, player) {
+    let frame = () => new Promise(window.requestAnimationFrame);
+
+    (async () => {
+        if (disc.position.z == 0) {
+          while (disc.position.z < 0.9) {
+            await frame();
+            disc.position.z += 0.1;
+            disc.rotation.z += 0.3;
+            if (disc.position.z > 0.7) {
+              if (player == 1){
+                disc.material.color.set(0x000000);
+              } else if (player == 2) {
+                disc.material.color.set(0xFFFFFF);
+              }
+            }
+            this.updateView();
+          }
+          if (disc.position.z > 0.9) {
+            while (disc.position.z > 0) {
+              await frame();
+              disc.position.z -= 0.1;
+              // disc.rotation.z += 0.29;
+              this.updateView();
+            }
+          }
+          disc.position.z = 0;
+          disc.rotation.z = 0;
+        }
+    })();
   }
 
   sceneSetup() {
