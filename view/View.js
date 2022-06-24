@@ -48,45 +48,71 @@ class View {
 
   makeDisc(x, y, boardGrid_x, boardGrid_y, option) {
     if (option == 1) {
-      const geometry = new THREE.CylinderGeometry(0.35, 0.35, 0.15, 50);
-      const material = new THREE.MeshBasicMaterial({ color: 0x000000 });
-      const disc = new THREE.Mesh(geometry, material);
-      const edges = new THREE.EdgesGeometry(geometry);
-      const disc_edges = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x2a2a2a }));
-      disc_edges.name = "disc_edges";
-      // this.scene.add(disc_edges);
-      disc_edges.position.x = x;
-      disc_edges.position.y = y;
-      disc_edges.position.z = 0;
-      disc_edges.rotation.x = -1.5;
-      disc.name = "disc";
-      disc.boardGrid_x = boardGrid_x;
-      disc.boardGrid_y = boardGrid_y;
-      this.scene.add(disc);
-      disc.position.x = x;
-      disc.position.y = y;
-      disc.position.z = 0;
-      disc.rotation.x = -1.5;
+      const black_group = new THREE.Group();
+      black_group.name = "disc"
+      black_group.boardGrid_x = boardGrid_x;
+      black_group.boardGrid_y = boardGrid_y;
+
+      // black half 
+      const black_geometry = new THREE.CylinderGeometry(0.35, 0.35, 0.1, 50);
+      const black_material = new THREE.MeshBasicMaterial({ color: 0x000000 });
+      const black_disc = new THREE.Mesh(black_geometry, black_material);
+      black_disc.boardGrid_x = boardGrid_x;
+      black_disc.boardGrid_y = boardGrid_y;
+      black_disc.position.x = x;
+      black_disc.position.y = y;
+      black_disc.position.z = 0.1;
+      black_disc.rotation.x = -1.5;
+
+      // white half 
+      const white_group = new THREE.Group();
+      const white_geometry = new THREE.CylinderGeometry(0.35, 0.35, 0.1, 50);
+      const white_material = new THREE.MeshBasicMaterial({ color: 0xFFFFFF });
+      const white_disc = new THREE.Mesh(white_geometry, white_material);
+
+      white_disc.boardGrid_x = boardGrid_x;
+      white_disc.boardGrid_y = boardGrid_y;
+      white_disc.position.x = x;
+      white_disc.position.y = y;
+      white_disc.position.z = 0;
+      white_disc.rotation.x = -1.5;
+
+      // add
+      black_group.add(black_disc, white_disc);
+      this.scene.add(black_group);
+
     } else if (option == 2) {
-      const geometry = new THREE.CylinderGeometry(0.35, 0.35, 0.15, 50);
-      const material = new THREE.MeshBasicMaterial({ color: 0xFFFFFF });
-      const disc = new THREE.Mesh(geometry, material);
-      const edges = new THREE.EdgesGeometry(geometry);
-      const disc_edges = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x2a2a2a }));
-      disc_edges.name = "disc_edges";
-      // this.scene.add(disc_edges);
-      disc_edges.position.x = x;
-      disc_edges.position.y = y;
-      disc_edges.position.z = 0;
-      disc_edges.rotation.x = -1.5;
-      disc.name = "disc";
-      disc.boardGrid_x = boardGrid_x;
-      disc.boardGrid_y = boardGrid_y;
-      this.scene.add(disc);
-      disc.position.x = x;
-      disc.position.y = y;
-      disc.position.z = 0;
-      disc.rotation.x = -1.5;
+
+      const white_group = new THREE.Group();
+      white_group.name = "disc"
+      white_group.boardGrid_x = boardGrid_x;
+      white_group.boardGrid_y = boardGrid_y;
+
+      // black half 
+      const black_geometry = new THREE.CylinderGeometry(0.35, 0.35, 0.1, 50);
+      const black_material = new THREE.MeshBasicMaterial({ color: 0x000000 });
+      const black_disc = new THREE.Mesh(black_geometry, black_material);
+      black_disc.boardGrid_x = boardGrid_x;
+      black_disc.boardGrid_y = boardGrid_y;
+      black_disc.position.x = x;
+      black_disc.position.y = y;
+      black_disc.position.z = 0;
+      black_disc.rotation.x = - 1.5;
+
+      // white half 
+      const white_geometry = new THREE.CylinderGeometry(0.35, 0.35, 0.1, 50);
+      const white_material = new THREE.MeshBasicMaterial({ color: 0xFFFFFF });
+      const white_disc = new THREE.Mesh(white_geometry, white_material);
+
+      white_disc.boardGrid_x = boardGrid_x;
+      white_disc.boardGrid_y = boardGrid_y;
+      white_disc.position.x = x;
+      white_disc.position.y = y;
+      white_disc.position.z = 0.1;
+      white_disc.rotation.x = - 1.5;
+
+      white_group.add(white_disc, black_disc);
+      this.scene.add(white_group);
     }
   }
 
@@ -138,27 +164,33 @@ class View {
           while (disc.position.z < 0.9) {
             await frame();
             disc.position.z += 0.1;
-            disc.rotation.z += 0.3;
-            if (disc.position.z > 0.7) {
-              if (player == 1){
-                disc.material.color.set(0x000000);
-              } else if (player == 2) {
-                disc.material.color.set(0xFFFFFF);
-              }
-            }
+            
+            disc.children[0].rotation.x -= 0.3;
+            disc.children[1].rotation.x -= 0.3;
             this.updateView();
           }
           if (disc.position.z > 0.9) {
             while (disc.position.z > 0) {
               await frame();
               disc.position.z -= 0.1;
-              // disc.rotation.z += 0.29;
               this.updateView();
             }
           }
-          disc.position.z = 0;
-          disc.rotation.z = 0;
-          this.updateView();
+          if (player == 1) {
+            disc.position.z = 0;
+            disc.children[0].rotation.x = - 1.5;
+            disc.children[1].rotation.x = - 1.5;
+            disc.children[0].material.color.set(0x000000)
+            disc.children[1].material.color.set(0xFFFFFF)
+            this.updateView();
+          } else if (player == 2) {
+            disc.position.z = 0;
+            disc.children[0].rotation.x = - 1.5;
+            disc.children[1].rotation.x = - 1.5;
+            disc.children[0].material.color.set(0xFFFFFF)
+            disc.children[1].material.color.set(0x000000)
+            this.updateView();
+          }
         }
     })();
   }
