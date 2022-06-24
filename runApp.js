@@ -7,7 +7,6 @@ let TODO =
 "-- TODO --" + '\n' + '\n' +
 "* fix disc mesh lines click" + '\n' +
 "* make black and white discs (merge mesh)" + '\n' +
-"* disc flip animation" + '\n' + 
 "* fix camera" + '\n'  + 
 "* points visualizer"
 
