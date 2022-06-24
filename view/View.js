@@ -164,7 +164,9 @@ class View {
   }
 
   sceneSetup() {
-    this.scene.background = new THREE.Color(0xc6e4ee);
+    let arr = [0x41B3A3, 0x85DCB, 0xE8A87C, 0xC38D9E];
+    let pick = Math.floor(Math.random() * arr.length);
+    this.scene.background = new THREE.Color(arr[pick]);
   }
 
   getScene() {
