@@ -283,10 +283,10 @@ class View {
     this.scene.add(line);
     line.position.x = 3.58;
     line.position.y = 3.58;
-    line.position.z = - 0.7;
+    line.position.z = - 0.35;
     frame_cube.position.x = 3.58;
     frame_cube.position.y = 3.58;
-    frame_cube.position.z = - 0.7;
+    frame_cube.position.z = - 0.35;
     this.scene.add(frame_cube);
 
     // LINES
