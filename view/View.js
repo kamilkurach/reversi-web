@@ -9,7 +9,7 @@ class View {
 
   constructor() {
     this.scene = new THREE.Scene();
-    this.camera = new THREE.OrthographicCamera(21 / - 2, 21 / 2, 15 / 2, 15 / - 2, 1, 1000);
+    this.camera = new THREE.OrthographicCamera(23 / - 2, 23 / 2, 15 / 2, 15 / - 2, 1, 1000);
     this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     this.initView();
   }
