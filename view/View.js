@@ -48,7 +48,7 @@ class View {
 
   makeDisc(x, y, boardGrid_x, boardGrid_y, option) {
     if (option == 1) {
-      const geometry = new THREE.CylinderGeometry(0.3, 0.3, 0.15, 50);
+      const geometry = new THREE.CylinderGeometry(0.35, 0.35, 0.15, 50);
       const material = new THREE.MeshBasicMaterial({ color: 0x000000 });
       const disc = new THREE.Mesh(geometry, material);
       const edges = new THREE.EdgesGeometry(geometry);
@@ -68,7 +68,7 @@ class View {
       disc.position.z = 0;
       disc.rotation.x = -1.5;
     } else if (option == 2) {
-      const geometry = new THREE.CylinderGeometry(0.3, 0.3, 0.15, 50);
+      const geometry = new THREE.CylinderGeometry(0.35, 0.35, 0.15, 50);
       const material = new THREE.MeshBasicMaterial({ color: 0xFFFFFF });
       const disc = new THREE.Mesh(geometry, material);
       const edges = new THREE.EdgesGeometry(geometry);
