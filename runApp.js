@@ -5,8 +5,7 @@ import { Board } from './model/Board.js';
 let TODO =
 "VERSION: random play (v1.0)" + '\n' + '\n' +
 "-- TODO --" + '\n' + '\n' +
-"* fix disc mesh lines click" + '\n' +
-"* fix camera" + '\n'  + 
+"* fix raycaster error" + '\n' +
 "* points visualizer"
 
 
