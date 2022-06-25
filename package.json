@@ -5,8 +5,11 @@
     "eslint-plugin-import": "^2.25.3",
     "live-server": "^1.1.0"
   },
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "lint": "./node_modules/.bin/eslint --fix --ext .js,.jsx ."
+  },
+  "dependencies": {
+    "three": "^0.141.0"
   }
 }
