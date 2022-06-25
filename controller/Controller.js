@@ -10,6 +10,8 @@ class Controller {
   pairs;
   searchResult;
   isGameInterrupted;
+  view_x;
+  view_y;
 
   constructor(board, view) {
     this.board = board;
@@ -50,8 +52,7 @@ class Controller {
   };
 
   onPointerMove(event) {
-    console.clear();
-
+   
     this.isGameInterrupted = true;
 
     let raycaster = new THREE.Raycaster();
@@ -63,11 +64,17 @@ class Controller {
     raycaster.setFromCamera(pointer, this.camera);
 
     let intersects = raycaster.intersectObjects(this.scene.children);
-    let view_x = intersects[0].object.position.x
-    let view_y = intersects[0].object.position.y
 
-    let boardGrid_x = view_x.toFixed(0);
-    let boardGrid_y = view_y.toFixed(0);
+    for(let i = 0; i < intersects.length; i++) {
+      if (intersects[i].object.name == "square") {
+        this.view_x = intersects[i].object.position.x
+        this.view_y = intersects[i].object.position.y
+        break;
+      }
+    }
+         
+    let boardGrid_x = this.view_x.toFixed(0);
+    let boardGrid_y = this.view_y.toFixed(0);
 
     for (let move of this.board.validMoves) {
       let x = move[0];
@@ -75,7 +82,7 @@ class Controller {
       if (boardGrid_x == x && boardGrid_y == y) {
 
         // current player
-        this.addDisc(view_x, view_y, boardGrid_x, boardGrid_y, this.player);
+        this.addDisc(this.view_x, this.view_y, boardGrid_x, boardGrid_y, this.player);
 
         this.view.removeHighlightValidMoves(this.board.validMoves, this.player);
 

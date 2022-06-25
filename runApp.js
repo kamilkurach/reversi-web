@@ -5,7 +5,6 @@ import { Board } from './model/Board.js';
 let TODO =
 "VERSION: random play (v1.0)" + '\n' + '\n' +
 "-- TODO --" + '\n' + '\n' +
-"* fix raycaster error" + '\n' +
 "* points visualizer"
 
 
