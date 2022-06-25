@@ -1,4 +1,8 @@
 
+<p float="left">
+    <img src="resources/reversi.gif" alt="drawing" width="600"/>
+</p>
+
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/yacotaco/reversi-web.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/yacotaco/reversi-web/context:javascript)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/yacotaco/reversi-web.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/yacotaco/reversi-web/alerts/)
 
