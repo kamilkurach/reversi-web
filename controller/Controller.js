@@ -54,54 +54,62 @@ class Controller {
   onPointerMove(event) {
    
     this.isGameInterrupted = true;
+    
+    if (this.board.validMoves.length != 0) {
+      let raycaster = new THREE.Raycaster();
+      let pointer = new THREE.Vector2();
 
-    let raycaster = new THREE.Raycaster();
-    let pointer = new THREE.Vector2();
+      pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+      pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
 
-    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-    pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
+      raycaster.setFromCamera(pointer, this.camera);
 
-    raycaster.setFromCamera(pointer, this.camera);
+      let intersects = raycaster.intersectObjects(this.scene.children);
 
-    let intersects = raycaster.intersectObjects(this.scene.children);
+      for(let i = 0; i < intersects.length; i++) {
+        if (intersects[i].object.name == "square") {
+          this.view_x = intersects[i].object.position.x
+          this.view_y = intersects[i].object.position.y
+          break;
+        }
+      }
+          
+      let boardGrid_x = this.view_x.toFixed(0);
+      let boardGrid_y = this.view_y.toFixed(0);
 
-    for(let i = 0; i < intersects.length; i++) {
-      if (intersects[i].object.name == "square") {
-        this.view_x = intersects[i].object.position.x
-        this.view_y = intersects[i].object.position.y
-        break;
+      for (let move of this.board.validMoves) {
+        let x = move[0];
+        let y = move[1];
+        if (boardGrid_x == x && boardGrid_y == y) {
+
+          // current player
+          this.addDisc(this.view_x, this.view_y, boardGrid_x, boardGrid_y, this.player);
+
+          this.view.removeHighlightValidMoves(this.board.validMoves, this.player);
+
+          //  flip disc/discs
+          this.flip(boardGrid_x, boardGrid_y, this.player);
+
+          // change player
+          this.changePlayer();
+
+          // new player 
+          this.board.recalcBoard(this.player);
+
+          this.view.highlightValidMoves(this.board.validMoves, this.player);
+
+          this.renderer.render(this.scene, this.camera);
+
+          break;
+        }
+      };
+    } else if (this.board.validMoves.length == 0) {
+      this.calcPointsForPlayers();
+      if (window.confirm("Player 1 (balck): " + this.board.player_1_points +
+      " " + "Player 2 (white): " + this.board.player_2_points)) {
+        window.location.reload();
       }
     }
-         
-    let boardGrid_x = this.view_x.toFixed(0);
-    let boardGrid_y = this.view_y.toFixed(0);
-
-    for (let move of this.board.validMoves) {
-      let x = move[0];
-      let y = move[1];
-      if (boardGrid_x == x && boardGrid_y == y) {
-
-        // current player
-        this.addDisc(this.view_x, this.view_y, boardGrid_x, boardGrid_y, this.player);
-
-        this.view.removeHighlightValidMoves(this.board.validMoves, this.player);
-
-        //  flip disc/discs
-        this.flip(boardGrid_x, boardGrid_y, this.player);
-
-        // change player
-        this.changePlayer();
-
-        // new player 
-        this.board.recalcBoard(this.player);
-
-        this.view.highlightValidMoves(this.board.validMoves, this.player);
-
-        this.renderer.render(this.scene, this.camera);
-
-        break;
-      }
-    };
   }
 
   start() {
