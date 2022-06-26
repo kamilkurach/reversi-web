@@ -14,7 +14,6 @@ class Controller {
   view_y;
   boardGrid_x;
   boardGrid_y;
-  agentPlayer;
 
   constructor(board, view) {
     this.board = board;
@@ -111,8 +110,10 @@ class Controller {
 
     } else if (this.board.validMoves.length == 0) {
       this.calcPointsForPlayers();
-      if (window.confirm("Player 1 (balck): " + this.board.player_1_points +
-      " " + "Player 2 (white): " + this.board.player_2_points)) {
+      let message = 
+      "Player 1 (balck): " + this.board.player_1_points + "\n" +
+      "Player 2 (white): " + this.board.player_2_points
+      if (window.confirm(message)) {
         window.location.reload();
       }
     }
