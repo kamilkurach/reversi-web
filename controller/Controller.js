@@ -12,6 +12,9 @@ class Controller {
   isGameInterrupted;
   view_x;
   view_y;
+  boardGrid_x;
+  boardGrid_y;
+  agentPlayer;
 
   constructor(board, view) {
     this.board = board;
@@ -74,21 +77,21 @@ class Controller {
         }
       }
           
-      let boardGrid_x = this.view_x.toFixed(0);
-      let boardGrid_y = this.view_y.toFixed(0);
+      this.boardGrid_x = this.view_x.toFixed(0);
+      this.boardGrid_y = this.view_y.toFixed(0);
 
       for (let move of this.board.validMoves) {
         let x = move[0];
         let y = move[1];
-        if (boardGrid_x == x && boardGrid_y == y) {
+        if (this.boardGrid_x == x && this.boardGrid_y == y) {
 
           // current player
-          this.addDisc(this.view_x, this.view_y, boardGrid_x, boardGrid_y, this.player);
+          this.addDisc(this.view_x, this.view_y, this.boardGrid_x, this.boardGrid_y, this.player);
 
           this.view.removeHighlightValidMoves(this.board.validMoves, this.player);
 
           //  flip disc/discs
-          this.flip(boardGrid_x, boardGrid_y, this.player);
+          this.flip(this.boardGrid_x, this.boardGrid_y, this.player);
 
           // change player
           this.changePlayer();
@@ -103,6 +106,9 @@ class Controller {
           break;
         }
       };
+
+      this.randomBotMove();
+
     } else if (this.board.validMoves.length == 0) {
       this.calcPointsForPlayers();
       if (window.confirm("Player 1 (balck): " + this.board.player_1_points +
@@ -137,6 +143,51 @@ class Controller {
     this.view.updateView();
   }
 
+  randomBotMove() {
+  
+    setTimeout(() => {
+      if (this.board.validMoves.length != 0) {
+
+        let pickedMove = Math.floor(Math.random() * this.board.validMoves.length);
+  
+        this.view_x = this.board.validMoves[pickedMove][0] + this.board.validMoves[pickedMove][0] * 0.02;
+        this.view_y = this.board.validMoves[pickedMove][1] + this.board.validMoves[pickedMove][1] * 0.02;
+  
+        this.boardGrid_x = this.view_x.toFixed(0);
+        this.boardGrid_y = this.view_y.toFixed(0);
+
+        for (let move of this.board.validMoves) {
+          let x = move[0];
+          let y = move[1];
+          if (this.boardGrid_x == x && this.boardGrid_y == y) {
+  
+            // current player
+            this.addDisc(this.view_x, this.view_y, this.boardGrid_x, this.boardGrid_y, this.player);
+  
+            this.view.removeHighlightValidMoves(this.board.validMoves, this.player);
+  
+            //  flip disc/discs
+            this.flip(this.boardGrid_x, this.boardGrid_y, this.player);
+  
+            // change player
+            this.changePlayer();
+  
+            // new player 
+            this.board.recalcBoard(this.player);
+  
+            this.view.highlightValidMoves(this.board.validMoves, this.player);
+  
+            this.renderer.render(this.scene, this.camera);
+            
+            break;
+          }
+        };
+  
+      }  
+      
+    }, 1200)
+  }
+
   randomPlay() {
 
     if (this.board.validMoves.length != 0) {
@@ -146,21 +197,21 @@ class Controller {
       let view_x = this.board.validMoves[pickedMove][0] + this.board.validMoves[pickedMove][0] * 0.02;
       let view_y = this.board.validMoves[pickedMove][1] + this.board.validMoves[pickedMove][1] * 0.02;
 
-      let boardGrid_x = view_x.toFixed(0);
-      let boardGrid_y = view_y.toFixed(0);
+      this.boardGrid_x = view_x.toFixed(0);
+      this.boardGrid_y = view_y.toFixed(0);
 
       for (let move of this.board.validMoves) {
         let x = move[0];
         let y = move[1];
-        if (boardGrid_x == x && boardGrid_y == y) {
+        if (this.boardGrid_x == x && this.boardGrid_y == y) {
 
           // current player
-          this.addDisc(view_x, view_y, boardGrid_x, boardGrid_y, this.player);
+          this.addDisc(view_x, view_y, this.boardGrid_x, this.boardGrid_y, this.player);
 
           this.view.removeHighlightValidMoves(this.board.validMoves, this.player);
 
           //  flip disc/discs
-          this.flip(boardGrid_x, boardGrid_y, this.player);
+          this.flip(this.boardGrid_x, this.boardGrid_y, this.player);
 
           // change player
           this.changePlayer();
