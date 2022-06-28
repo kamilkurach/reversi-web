@@ -163,7 +163,7 @@ class View {
         if (disc.position.z == 0) {
           while (disc.position.z < 0.9) {
             await frame();
-            disc.position.z += 0.1;
+            disc.position.z += 0.05;
             
             disc.children[0].rotation.x -= 0.3;
             disc.children[1].rotation.x -= 0.3;
