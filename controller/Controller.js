@@ -149,7 +149,7 @@ class Controller {
     setTimeout(() => {
       if (this.board.validMoves.length != 0) {
 
-        let pickedMove = this.searchMax();
+        let pickedMove = this.searchMin();
         // let pickedMove = Math.floor(Math.random() * this.board.validMoves.length);
 
         // this.view_x = this.board.validMoves[pickedMove][0] + this.board.validMoves[pickedMove][0] * 0.02;
@@ -197,7 +197,7 @@ class Controller {
 
     if (this.board.validMoves.length != 0) {
 
-      let pickedMove = this.searchMax();
+      let pickedMove = this.searchMin();
       
       // let pickedMove = Math.floor(Math.random() * this.board.validMoves.length);
 
@@ -278,13 +278,13 @@ class Controller {
     });
   }
 
-  searchMax() {
+  searchMin() {
     // search for move with max opponent discs
-    let max = 0;
+    let max = 100;
     let move;
     this.board.pairs.forEach(element => {
       let discsToFlip = element.slice(3)[0];
-      if (discsToFlip.length > max) {
+      if (discsToFlip.length < max) {
         max = discsToFlip.length;
         move = element[1];
       }
