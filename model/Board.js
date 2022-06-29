@@ -150,7 +150,7 @@ class Board {
       let y = disc[1];
       let player = boardGrid[x][y];
 
-      for (let i = x; i < 7; i++) {
+      for (let i = x + 1; i < 7; i++) {
         if (boardGrid[i][y] != 0) {
           if (boardGrid[i][y] != player) {
             let discToFlip = [i, y];
@@ -171,7 +171,7 @@ class Board {
       let y = disc[1];
       let player = boardGrid[x][y];
 
-      for (let i = x; i > 0; i--) {
+      for (let i = x - 1; i > 0; i--) {
         if (boardGrid[i][y] != 0) {
           if (boardGrid[i][y] != player) {
             let discToFlip = [i, y];
@@ -217,7 +217,7 @@ class Board {
       let y = disc[1];
       let player = boardGrid[x][y];
 
-      for (let i = y; i < 7; i++) {
+      for (let i = y + 1; i < 7; i++) {
         if (boardGrid[x][i] != 0) {
           if (boardGrid[x][i] != player) {
             let discToFlip = [x, i];
@@ -238,7 +238,7 @@ class Board {
       let y = disc[1];
       let player = boardGrid[x][y];
 
-      for (let i = y; i > 0; i--) {
+      for (let i = y - 1; i > 0; i--) {
         if (boardGrid[x][i] != 0) {
           if (boardGrid[x][i] != player) {
             let discToFlip = [x, i];
