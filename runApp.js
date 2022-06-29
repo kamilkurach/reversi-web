@@ -3,7 +3,7 @@ import { View } from './view/View.js';
 import { Board } from './model/Board.js';
 
 let TODO =
-"VERSION: random play (v1.0)" + '\n' + '\n' +
+"VERSION: random play (v1.0.1)" + '\n' + '\n' +
 "-- TODO --" + '\n' + '\n' +
 "* points visualizer"
 
