@@ -49,7 +49,7 @@ class View {
   makeDisc(x, y, boardGrid_x, boardGrid_y, option) {
     if (option == 1) {
       const black_group = new THREE.Group();
-      black_group.name = "disc"
+      black_group.name = "disc";
       black_group.boardGrid_x = boardGrid_x;
       black_group.boardGrid_y = boardGrid_y;
 
@@ -65,7 +65,6 @@ class View {
       black_disc.rotation.x = -1.5;
 
       // white half 
-      const white_group = new THREE.Group();
       const white_geometry = new THREE.CylinderGeometry(0.35, 0.35, 0.1, 50);
       const white_material = new THREE.MeshBasicMaterial({ color: 0xFFFFFF });
       const white_disc = new THREE.Mesh(white_geometry, white_material);
@@ -84,7 +83,7 @@ class View {
     } else if (option == 2) {
 
       const white_group = new THREE.Group();
-      white_group.name = "disc"
+      white_group.name = "disc";
       white_group.boardGrid_x = boardGrid_x;
       white_group.boardGrid_y = boardGrid_y;
 
@@ -180,15 +179,15 @@ class View {
             disc.position.z = 0;
             disc.children[0].rotation.x = - 1.5;
             disc.children[1].rotation.x = - 1.5;
-            disc.children[0].material.color.set(0x000000)
-            disc.children[1].material.color.set(0xFFFFFF)
+            disc.children[0].material.color.set(0x000000);
+            disc.children[1].material.color.set(0xFFFFFF);
             this.updateView();
           } else if (player == 2) {
             disc.position.z = 0;
             disc.children[0].rotation.x = - 1.5;
             disc.children[1].rotation.x = - 1.5;
-            disc.children[0].material.color.set(0xFFFFFF)
-            disc.children[1].material.color.set(0x000000)
+            disc.children[0].material.color.set(0xFFFFFF);
+            disc.children[1].material.color.set(0x000000);
             this.updateView();
           }
         }
@@ -272,7 +271,7 @@ class View {
       this.camera.position.z = 5.0;
       // ROTATION
       this.camera.rotation.x = 0;
-      this.camera.rotation.y = 0
+      this.camera.rotation.y = 0;
       this.camera.rotation.z = 1.57;
     }
   }
@@ -293,7 +292,7 @@ class View {
         const geometry = new THREE.BoxGeometry(1, 1, 0.01);
         const material = new THREE.MeshBasicMaterial({ color: 0x405336 });
         const cube = new THREE.Mesh(geometry, material);
-        cube.name = "square"
+        cube.name = "square";
         cube.material.transparent = true;
         this.scene.add(cube);
         cube.position.x = i;

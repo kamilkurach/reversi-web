@@ -149,17 +149,27 @@ class Controller {
     setTimeout(() => {
       if (this.board.validMoves.length != 0) {
 
-        let pickedMove = this.searchMax();
+        if (this.playCorners().length > 0) {
+          let pickedMove = this.playCorners();
+          this.view_x = pickedMove[0] + pickedMove[0] * 0.02;
+          this.view_y = pickedMove[1] + pickedMove[1] * 0.02;
+  
+          this.boardGrid_x = this.view_x.toFixed(0);
+          this.boardGrid_y = this.view_y.toFixed(0);
+          
+        } else {
+          let pickedMove = this.searchMin();
+          this.view_x = pickedMove[0][0] + pickedMove[0][0] * 0.02;
+          this.view_y = pickedMove[0][1] + pickedMove[0][1] * 0.02;
+        
+          this.boardGrid_x = this.view_x.toFixed(0);
+          this.boardGrid_y = this.view_y.toFixed(0);
+        }
+        
         // let pickedMove = Math.floor(Math.random() * this.board.validMoves.length);
 
         // this.view_x = this.board.validMoves[pickedMove][0] + this.board.validMoves[pickedMove][0] * 0.02;
         // this.view_y = this.board.validMoves[pickedMove][1] + this.board.validMoves[pickedMove][1] * 0.02;
-
-        this.view_x = pickedMove[0][0] + pickedMove[0][0] * 0.02;
-        this.view_y = pickedMove[0][1] + pickedMove[0][1] * 0.02;
-
-        this.boardGrid_x = this.view_x.toFixed(0);
-        this.boardGrid_y = this.view_y.toFixed(0);
 
         for (let move of this.board.validMoves) {
           let x = move[0];
@@ -197,18 +207,27 @@ class Controller {
 
     if (this.board.validMoves.length != 0) {
 
-      let pickedMove = this.searchMax();
+      if (this.playCorners().length > 0) {
+        let pickedMove = this.playCorners();
+        this.view_x = pickedMove[0] + pickedMove[0] * 0.02;
+        this.view_y = pickedMove[1] + pickedMove[1] * 0.02;
+
+        this.boardGrid_x = this.view_x.toFixed(0);
+        this.boardGrid_y = this.view_y.toFixed(0);
+        
+      } else {
+        let pickedMove = this.searchMin();
+        this.view_x = pickedMove[0][0] + pickedMove[0][0] * 0.02;
+        this.view_y = pickedMove[0][1] + pickedMove[0][1] * 0.02;
       
+        this.boardGrid_x = this.view_x.toFixed(0);
+        this.boardGrid_y = this.view_y.toFixed(0);
+      }
+
       // let pickedMove = Math.floor(Math.random() * this.board.validMoves.length);
 
       // let view_x = this.board.validMoves[pickedMove][0] + this.board.validMoves[pickedMove][0] * 0.02;
       // let view_y = this.board.validMoves[pickedMove][1] + this.board.validMoves[pickedMove][1] * 0.02;
-
-      this.view_x = pickedMove[0][0] + pickedMove[0][0] * 0.02;
-      this.view_y = pickedMove[0][1] + pickedMove[0][1] * 0.02;
-      
-      this.boardGrid_x = this.view_x.toFixed(0);
-      this.boardGrid_y = this.view_y.toFixed(0);
 
       for (let move of this.board.validMoves) {
         let x = move[0];
@@ -278,18 +297,40 @@ class Controller {
     });
   }
 
-  searchMax() {
+  searchMin() {
     // search for move with max opponent discs
-    let max = 0;
+    let max = 100;
     let move;
     this.board.pairs.forEach(element => {
       let discsToFlip = element.slice(3)[0];
-      if (discsToFlip.length > max) {
+      if (discsToFlip.length < max) {
         max = discsToFlip.length;
         move = element[1];
       }
     });
     return move;
+  }
+
+  playCorners() {
+    let result = [];
+    for (let move of this.board.validMoves) {
+      let x = move[0];
+      let y = move[1];
+      if (x == 0 && y == 0) {
+        result = move;
+        break;
+      } else if (x == 0 && y == 7) {
+        result = move;
+        break;
+      } else if (x == 7 && y == 0) {
+        result = move;
+        break;
+      } else if (x == 7 && y == 7) {
+        result = move;
+        break;
+      } 
+    }
+    return result;
   }
 
 }
