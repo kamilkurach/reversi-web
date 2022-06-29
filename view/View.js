@@ -163,7 +163,7 @@ class View {
         if (disc.position.z == 0) {
           while (disc.position.z < 0.9) {
             await frame();
-            disc.position.z += 0.1;
+            disc.position.z += 0.05;
             
             disc.children[0].rotation.x -= 0.3;
             disc.children[1].rotation.x -= 0.3;
@@ -262,9 +262,9 @@ class View {
       this.camera.position.y = 5.5;
       this.camera.position.z = 5.0;
       // ROTATION
-      this.camera.rotation.x = - 0.27;
-      this.camera.rotation.y = 0.27;
-      this.camera.rotation.z = 2.25;
+      this.camera.rotation.x = - 0.47;
+      this.camera.rotation.y = 0.47;
+      this.camera.rotation.z = 2.35;
     } else if (this.is3D == false) {
       // POSITION
       this.camera.position.x = 3;

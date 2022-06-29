@@ -14,7 +14,6 @@ class Controller {
   view_y;
   boardGrid_x;
   boardGrid_y;
-  agentPlayer;
 
   constructor(board, view) {
     this.board = board;
@@ -44,7 +43,7 @@ class Controller {
     this.board.calcPoints(1);
     this.board.calcPoints(2);
     console.log("player_1_points (balck): " + this.board.player_1_points +
-     " " + "player_2_points (white): " + this.board.player_2_points);
+      " " + "player_2_points (white): " + this.board.player_2_points);
   }
 
   initDiscs() {
@@ -55,9 +54,9 @@ class Controller {
   };
 
   onPointerMove(event) {
-   
+
     this.isGameInterrupted = true;
-    
+
     if (this.board.validMoves.length != 0) {
       let raycaster = new THREE.Raycaster();
       let pointer = new THREE.Vector2();
@@ -69,14 +68,14 @@ class Controller {
 
       let intersects = raycaster.intersectObjects(this.scene.children);
 
-      for(let i = 0; i < intersects.length; i++) {
+      for (let i = 0; i < intersects.length; i++) {
         if (intersects[i].object.name == "square") {
           this.view_x = intersects[i].object.position.x
           this.view_y = intersects[i].object.position.y
           break;
         }
       }
-          
+
       this.boardGrid_x = this.view_x.toFixed(0);
       this.boardGrid_y = this.view_y.toFixed(0);
 
@@ -111,8 +110,10 @@ class Controller {
 
     } else if (this.board.validMoves.length == 0) {
       this.calcPointsForPlayers();
-      if (window.confirm("Player 1 (balck): " + this.board.player_1_points +
-      " " + "Player 2 (white): " + this.board.player_2_points)) {
+      let message =
+        "Player 1 (balck): " + this.board.player_1_points + "\n" +
+        "Player 2 (white): " + this.board.player_2_points
+      if (window.confirm(message)) {
         window.location.reload();
       }
     }
@@ -144,15 +145,19 @@ class Controller {
   }
 
   randomBotMove() {
-  
+
     setTimeout(() => {
       if (this.board.validMoves.length != 0) {
 
-        let pickedMove = Math.floor(Math.random() * this.board.validMoves.length);
-  
-        this.view_x = this.board.validMoves[pickedMove][0] + this.board.validMoves[pickedMove][0] * 0.02;
-        this.view_y = this.board.validMoves[pickedMove][1] + this.board.validMoves[pickedMove][1] * 0.02;
-  
+        let pickedMove = this.searchMax();
+        // let pickedMove = Math.floor(Math.random() * this.board.validMoves.length);
+
+        // this.view_x = this.board.validMoves[pickedMove][0] + this.board.validMoves[pickedMove][0] * 0.02;
+        // this.view_y = this.board.validMoves[pickedMove][1] + this.board.validMoves[pickedMove][1] * 0.02;
+
+        this.view_x = pickedMove[0][0] + pickedMove[0][0] * 0.02;
+        this.view_y = pickedMove[0][1] + pickedMove[0][1] * 0.02;
+
         this.boardGrid_x = this.view_x.toFixed(0);
         this.boardGrid_y = this.view_y.toFixed(0);
 
@@ -160,31 +165,31 @@ class Controller {
           let x = move[0];
           let y = move[1];
           if (this.boardGrid_x == x && this.boardGrid_y == y) {
-  
+
             // current player
             this.addDisc(this.view_x, this.view_y, this.boardGrid_x, this.boardGrid_y, this.player);
-  
+
             this.view.removeHighlightValidMoves(this.board.validMoves, this.player);
-  
+
             //  flip disc/discs
             this.flip(this.boardGrid_x, this.boardGrid_y, this.player);
-  
+
             // change player
             this.changePlayer();
-  
+
             // new player 
             this.board.recalcBoard(this.player);
-  
+
             this.view.highlightValidMoves(this.board.validMoves, this.player);
-  
+
             this.renderer.render(this.scene, this.camera);
-            
+
             break;
           }
         };
-  
-      }  
-      
+
+      }
+
     }, 1200)
   }
 
@@ -192,13 +197,18 @@ class Controller {
 
     if (this.board.validMoves.length != 0) {
 
-      let pickedMove = Math.floor(Math.random() * this.board.validMoves.length);
+      let pickedMove = this.searchMax();
+      
+      // let pickedMove = Math.floor(Math.random() * this.board.validMoves.length);
 
-      let view_x = this.board.validMoves[pickedMove][0] + this.board.validMoves[pickedMove][0] * 0.02;
-      let view_y = this.board.validMoves[pickedMove][1] + this.board.validMoves[pickedMove][1] * 0.02;
+      // let view_x = this.board.validMoves[pickedMove][0] + this.board.validMoves[pickedMove][0] * 0.02;
+      // let view_y = this.board.validMoves[pickedMove][1] + this.board.validMoves[pickedMove][1] * 0.02;
 
-      this.boardGrid_x = view_x.toFixed(0);
-      this.boardGrid_y = view_y.toFixed(0);
+      this.view_x = pickedMove[0][0] + pickedMove[0][0] * 0.02;
+      this.view_y = pickedMove[0][1] + pickedMove[0][1] * 0.02;
+      
+      this.boardGrid_x = this.view_x.toFixed(0);
+      this.boardGrid_y = this.view_y.toFixed(0);
 
       for (let move of this.board.validMoves) {
         let x = move[0];
@@ -206,7 +216,7 @@ class Controller {
         if (this.boardGrid_x == x && this.boardGrid_y == y) {
 
           // current player
-          this.addDisc(view_x, view_y, this.boardGrid_x, this.boardGrid_y, this.player);
+          this.addDisc(this.view_x, this.view_y, this.boardGrid_x, this.boardGrid_y, this.player);
 
           this.view.removeHighlightValidMoves(this.board.validMoves, this.player);
 
@@ -266,6 +276,20 @@ class Controller {
         });
       }
     });
+  }
+
+  searchMax() {
+    // search for move with max opponent discs
+    let max = 0;
+    let move;
+    this.board.pairs.forEach(element => {
+      let discsToFlip = element.slice(3)[0];
+      if (discsToFlip.length > max) {
+        max = discsToFlip.length;
+        move = element[1];
+      }
+    });
+    return move;
   }
 
 }
