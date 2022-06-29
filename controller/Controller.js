@@ -204,11 +204,11 @@ class Controller {
       // let view_x = this.board.validMoves[pickedMove][0] + this.board.validMoves[pickedMove][0] * 0.02;
       // let view_y = this.board.validMoves[pickedMove][1] + this.board.validMoves[pickedMove][1] * 0.02;
 
-      let view_x = pickedMove[0][0] + pickedMove[0][0] * 0.02;
-      let view_y = pickedMove[0][1] + pickedMove[0][1] * 0.02;
+      this.view_x = pickedMove[0][0] + pickedMove[0][0] * 0.02;
+      this.view_y = pickedMove[0][1] + pickedMove[0][1] * 0.02;
       
-      this.boardGrid_x = view_x.toFixed(0);
-      this.boardGrid_y = view_y.toFixed(0);
+      this.boardGrid_x = this.view_x.toFixed(0);
+      this.boardGrid_y = this.view_y.toFixed(0);
 
       for (let move of this.board.validMoves) {
         let x = move[0];
@@ -216,7 +216,7 @@ class Controller {
         if (this.boardGrid_x == x && this.boardGrid_y == y) {
 
           // current player
-          this.addDisc(view_x, view_y, this.boardGrid_x, this.boardGrid_y, this.player);
+          this.addDisc(this.view_x, this.view_y, this.boardGrid_x, this.boardGrid_y, this.player);
 
           this.view.removeHighlightValidMoves(this.board.validMoves, this.player);
 
