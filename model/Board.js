@@ -151,18 +151,20 @@ class Board {
       let player = boardGrid[x][y];
 
       for (let i = x + 1; i < 7; i++) {
-        if (boardGrid[i][y] != 0) {
-          if (boardGrid[i][y] != player) {
-            let discToFlip = [i, y];
-            horizontalDiscToFlipRight.push(discToFlip);
-          }
+        if (boardGrid[i][y] != 0 && boardGrid[i][y] != player) {
+          let discToFlip = [i, y];
+          horizontalDiscToFlipRight.push(discToFlip);
+          
           if (boardGrid[i][y] != player && boardGrid[i + 1][y] == 0) {
             let position = [i + 1, y];
             horizontalValidMoves.push(position);
             horizontalValidMovesRight.push(position);
             break;
           }
-        }
+
+        } else if (boardGrid[i][y] == 0 || boardGrid[i][y] == player) {
+          break;
+        } 
       }
     }
 
@@ -172,17 +174,18 @@ class Board {
       let player = boardGrid[x][y];
 
       for (let i = x - 1; i > 0; i--) {
-        if (boardGrid[i][y] != 0) {
-          if (boardGrid[i][y] != player) {
-            let discToFlip = [i, y];
-            horizontalDiscToFlipLeft.push(discToFlip);
-          }
+        if (boardGrid[i][y] != 0 && boardGrid[i][y] != player) {
+          let discToFlip = [i, y];
+          horizontalDiscToFlipLeft.push(discToFlip);
+          
           if (boardGrid[i][y] != player && boardGrid[i - 1][y] == 0) {
             let position = [i - 1, y];
             horizontalValidMoves.push(position);
             horizontalValidMovesLeft.push(position);
             break;
           }
+        } else if (boardGrid[i][y] == 0 || boardGrid[i][y] == player) {
+          break;
         }
       }
     };
@@ -218,17 +221,18 @@ class Board {
       let player = boardGrid[x][y];
 
       for (let i = y + 1; i < 7; i++) {
-        if (boardGrid[x][i] != 0) {
-          if (boardGrid[x][i] != player) {
-            let discToFlip = [x, i];
-            verticalDiscToFlipUp.push(discToFlip);
-          }
+        if (boardGrid[x][i] != 0 && boardGrid[x][i] != player) {
+          let discToFlip = [x, i];
+          verticalDiscToFlipUp.push(discToFlip);
+          
           if (boardGrid[x][i] != player && boardGrid[x][i + 1] == 0) {
             let position = [x, i + 1];
             verticalValidMoves.push(position);
             verticalValidMovesUp.push(position);
             break;
           }
+        } else if (boardGrid[x][i] == 0 || boardGrid[x][i] == player) {
+          break;
         }
       }
     }
@@ -239,17 +243,18 @@ class Board {
       let player = boardGrid[x][y];
 
       for (let i = y - 1; i > 0; i--) {
-        if (boardGrid[x][i] != 0) {
-          if (boardGrid[x][i] != player) {
-            let discToFlip = [x, i];
-            verticalDiscToFlipDown.push(discToFlip);
-          }
+        if (boardGrid[x][i] != 0 && boardGrid[x][i] != player) {
+          let discToFlip = [x, i];
+          verticalDiscToFlipDown.push(discToFlip);
+          
           if (boardGrid[x][i] != player && boardGrid[x][i - 1] == 0) {
             let position = [x, i - 1];
             verticalValidMoves.push(position);
             verticalValidMovesDown.push(position);
             break;
           }
+        } else if (boardGrid[x][i] == 0 || boardGrid[x][i] == player) {
+          break;
         }
       }
     }
@@ -286,17 +291,18 @@ class Board {
       let j = y + 1;
 
       for (let i = x - 1; i > 0; i--) {
-        if (boardGrid[i][j] != 0) {
-          if (boardGrid[i][j] != player) {
-            let discToFlip = [i, j];
-            diagonalDiscToFlipUp.push(discToFlip);
-          }
+        if (boardGrid[i][j] != 0 && boardGrid[i][j] != player) {
+          let discToFlip = [i, j];
+          diagonalDiscToFlipUp.push(discToFlip);
+          
           if (boardGrid[i][j] != player && boardGrid[i - 1][j + 1] == 0) {
             let position = [i - 1, j + 1];
             diagonalValidMoves.push(position);
             diagonalValidMovesUp.push(position);
             break;
           }
+        } else if (boardGrid[i][j] == 0 || boardGrid[i][j] == player) {
+          break;
         }
         j++;
       }
@@ -309,17 +315,18 @@ class Board {
       let j = y - 1;
 
       for (let i = x + 1; i < 7; i++) {
-        if (boardGrid[i][j] != 0) {
-          if (boardGrid[i][j] != player) {
-            let discToFlip = [i, j];
-            diagonalDiscToFlipDown.push(discToFlip);
-          }
+        if (boardGrid[i][j] != 0 && boardGrid[i][j] != player) {
+          let discToFlip = [i, j];
+          diagonalDiscToFlipDown.push(discToFlip);
+          
           if (boardGrid[i][j] != player && boardGrid[i + 1][j - 1] == 0) {
             let position = [i + 1, j - 1];
             diagonalValidMoves.push(position);
             diagonalValidMovesDown.push(position);
             break;
           }
+        } else if (boardGrid[i][j] == 0 || boardGrid[i][j] == player) {
+          break;
         }
         j--;
       }
@@ -357,22 +364,18 @@ class Board {
       let j = y - 1;
 
       for (let i = x - 1; i > 0; i--) {
-        if (boardGrid[i][j] != 0) {
-          if (boardGrid[i][j] != player) {
-            let discToFlip = [i, j];
-            diagonalDiscToFlipUp.push(discToFlip);
-          }
-          if (boardGrid[i][j] == player) {
+        if (boardGrid[i][j] != 0 && boardGrid[i][j] != player) {
+          let discToFlip = [i, j];
+          diagonalDiscToFlipUp.push(discToFlip);
+          
+          if (boardGrid[i][j] != player && boardGrid[i - 1][j - 1] == 0) {
+            let position = [i - 1, j - 1];
+            diagonalValidMoves.push(position);
+            diagonalValidMovesUp.push(position);
             break;
-          } else {
-            if (boardGrid[i][j] != player && boardGrid[i - 1][j - 1] == 0) {
-              let position = [i - 1, j - 1];
-              diagonalValidMoves.push(position);
-              diagonalValidMovesUp.push(position);
-              break;
-            }
           }
-
+        } else if (boardGrid[i][j] == 0 || boardGrid[i][j] == player) {
+          break;
         }
         j--;
       }
@@ -385,23 +388,18 @@ class Board {
       let j = y + 1;
 
       for (let i = x + 1; i < 7; i++) {
-        if (boardGrid[i][j] != 0) {
-          if (boardGrid[i][j] != player) {
-            let discToFlip = [i, j];
-            diagonalDiscToFlipDown.push(discToFlip);
-          }
-          if (boardGrid[i][j] == player) {
+        if (boardGrid[i][j] != 0 && boardGrid[i][j] != player) {
+          let discToFlip = [i, j];
+          diagonalDiscToFlipDown.push(discToFlip);
+          
+          if (boardGrid[i][j] != player && boardGrid[i + 1][j + 1] == 0) {
+            let position = [i + 1, j + 1];
+            diagonalValidMoves.push(position);
+            diagonalValidMovesDown.push(position);
             break;
-          } else {
-            if (boardGrid[i][j] != 0) {
-              if (boardGrid[i][j] != player && boardGrid[i + 1][j + 1] == 0) {
-                let position = [i + 1, j + 1];
-                diagonalValidMoves.push(position);
-                diagonalValidMovesDown.push(position);
-                break;
-              }
-            }
           }
+        } else if (boardGrid[i][j] == 0 || boardGrid[i][j] == player) {
+          break;
         }
         j++;
       }
