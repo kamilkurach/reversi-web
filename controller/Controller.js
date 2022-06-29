@@ -149,10 +149,14 @@ class Controller {
     setTimeout(() => {
       if (this.board.validMoves.length != 0) {
 
-        let pickedMove = Math.floor(Math.random() * this.board.validMoves.length);
+        let pickedMove = this.searchMax();
+        // let pickedMove = Math.floor(Math.random() * this.board.validMoves.length);
 
-        this.view_x = this.board.validMoves[pickedMove][0] + this.board.validMoves[pickedMove][0] * 0.02;
-        this.view_y = this.board.validMoves[pickedMove][1] + this.board.validMoves[pickedMove][1] * 0.02;
+        // this.view_x = this.board.validMoves[pickedMove][0] + this.board.validMoves[pickedMove][0] * 0.02;
+        // this.view_y = this.board.validMoves[pickedMove][1] + this.board.validMoves[pickedMove][1] * 0.02;
+
+        this.view_x = pickedMove[0][0] + pickedMove[0][0] * 0.02;
+        this.view_y = pickedMove[0][1] + pickedMove[0][1] * 0.02;
 
         this.boardGrid_x = this.view_x.toFixed(0);
         this.boardGrid_y = this.view_y.toFixed(0);
@@ -193,11 +197,16 @@ class Controller {
 
     if (this.board.validMoves.length != 0) {
 
-      let pickedMove = Math.floor(Math.random() * this.board.validMoves.length);
+      let pickedMove = this.searchMax();
+      
+      // let pickedMove = Math.floor(Math.random() * this.board.validMoves.length);
 
-      let view_x = this.board.validMoves[pickedMove][0] + this.board.validMoves[pickedMove][0] * 0.02;
-      let view_y = this.board.validMoves[pickedMove][1] + this.board.validMoves[pickedMove][1] * 0.02;
+      // let view_x = this.board.validMoves[pickedMove][0] + this.board.validMoves[pickedMove][0] * 0.02;
+      // let view_y = this.board.validMoves[pickedMove][1] + this.board.validMoves[pickedMove][1] * 0.02;
 
+      let view_x = pickedMove[0][0] + pickedMove[0][0] * 0.02;
+      let view_y = pickedMove[0][1] + pickedMove[0][1] * 0.02;
+      
       this.boardGrid_x = view_x.toFixed(0);
       this.boardGrid_y = view_y.toFixed(0);
 
@@ -267,6 +276,20 @@ class Controller {
         });
       }
     });
+  }
+
+  searchMax() {
+    // search for move with max opponent discs
+    let max = 0;
+    let move;
+    this.board.pairs.forEach(element => {
+      let discsToFlip = element.slice(3)[0];
+      if (discsToFlip.length > max) {
+        max = discsToFlip.length;
+        move = element[1];
+      }
+    });
+    return move;
   }
 
 }
