@@ -385,19 +385,21 @@ class Board {
       let j = y + 1;
 
       for (let i = x + 1; i < 7; i++) {
-        if (boardGrid[i][j] != player) {
-          let discToFlip = [i, j];
-          diagonalDiscToFlipDown.push(discToFlip);
-        }
-        if (boardGrid[i][j] == player) {
-          break;
-        } else {
-          if (boardGrid[i][j] != 0) {
-            if (boardGrid[i][j] != player && boardGrid[i + 1][j + 1] == 0) {
-              let position = [i + 1, j + 1];
-              diagonalValidMoves.push(position);
-              diagonalValidMovesDown.push(position);
-              break;
+        if (boardGrid[i][j] != 0) {
+          if (boardGrid[i][j] != player) {
+            let discToFlip = [i, j];
+            diagonalDiscToFlipDown.push(discToFlip);
+          }
+          if (boardGrid[i][j] == player) {
+            break;
+          } else {
+            if (boardGrid[i][j] != 0) {
+              if (boardGrid[i][j] != player && boardGrid[i + 1][j + 1] == 0) {
+                let position = [i + 1, j + 1];
+                diagonalValidMoves.push(position);
+                diagonalValidMovesDown.push(position);
+                break;
+              }
             }
           }
         }
